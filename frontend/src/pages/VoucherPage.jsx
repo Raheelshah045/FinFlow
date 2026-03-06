@@ -44,10 +44,28 @@ export const VoucherPage = ({ type, vouchers, products, parties, accounts, onAdd
                     { key: "date", label: "Date" },
                     { key: "party", label: type === "purchase" ? "Vendor" : "Client" },
                     { key: "paymentMode", label: "Mode", render: v => <Badge color="gray">{v.toUpperCase()}</Badge> },
-                    { key: "items", label: "Items", render: v => `${v.length} line(s)`, sortable: false },
+                    {
+                        key: "items",
+                        label: "Items",
+                        render: items => (
+                            <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                                {items.map((it, i) => (
+                                    <div key={i} style={{ fontSize: 12, color: "#475569" }}>
+                                        <span style={{ fontWeight: 600 }}>{it.name}</span> × {it.qty}
+                                    </div>
+                                ))}
+                            </div>
+                        ),
+                        sortable: false
+                    },
                     { key: "total", label: "Total", align: "right", render: v => <span style={{ fontFamily: "monospace", fontWeight: 700, color: "#0f172a" }}>{fmt(v)}</span> },
                     ...(type === "sale" ? [{ key: "margin", label: "Margin", align: "right", render: v => <span style={{ fontFamily: "monospace", fontWeight: 700, color: "#059669" }}>{fmt(v)}</span> }] : []),
-                    { key: "status", label: "Status", render: v => <Badge color="green">{v}</Badge> },
+                    {
+                        key: "status",
+                        label: "Status",
+                        align: "center",
+                        render: v => v === "posted" ? <div style={{ color: "#059669" }}><Icon name="check" size={18} /></div> : <div style={{ color: "#dc2626" }}><Icon name="close" size={18} /></div>
+                    },
                 ]} data={filtered} />
             </div>
 
