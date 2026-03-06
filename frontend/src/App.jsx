@@ -5,6 +5,7 @@ import { VoucherPage } from "./pages/VoucherPage";
 import { InventoryPage } from "./pages/InventoryPage";
 import { LedgerPage } from "./pages/LedgerPage";
 import { ReportsPage } from "./pages/ReportsPage";
+import { JournalPage } from "./pages/JournalPage";
 import { fmtShort, newId } from "./utils/formatters";
 import * as api from "./services/api";
 
@@ -98,9 +99,10 @@ export default function App() {
         { id: "dashboard", label: "Dashboard", icon: "dashboard" },
         { id: "purchase", label: "Purchase Vouchers", icon: "purchase" },
         { id: "sale", label: "Sales Vouchers", icon: "sale" },
+        { id: "journal", label: "Journal Vouchers", icon: "reports" },
         { id: "inventory", label: "Inventory", icon: "inventory" },
         { id: "ledger", label: "Bank Ledger", icon: "bank" },
-        { id: "reports", label: "P&L Reports", icon: "reports" },
+        { id: "reports", label: "P&L Reports", icon: "trend_up" },
     ];
 
     const cash = accounts.find(a => a.id === "cash")?.balance || 0;
@@ -171,12 +173,17 @@ export default function App() {
 
             {/* MAIN CONTENT */}
             <div style={{ flex: 1, overflow: "auto", padding: 28 }}>
-                {page === "dashboard" && <DashboardPage vouchers={vouchers} products={products} accounts={accounts} />}
-                {page === "purchase" && <VoucherPage type="purchase" vouchers={vouchers} products={products} parties={INITIAL_PARTIES} accounts={accounts} onAdd={createDoubleEntry} />}
-                {page === "sale" && <VoucherPage type="sale" vouchers={vouchers} products={products} parties={INITIAL_PARTIES} accounts={accounts} onAdd={createDoubleEntry} />}
-                {page === "inventory" && <InventoryPage products={products} />}
-                {page === "ledger" && <LedgerPage vouchers={vouchers} accounts={accounts} />}
-                {page === "reports" && <ReportsPage vouchers={vouchers} products={products} accounts={accounts} />}
+                {loading ? <div style={{ display: "flex", justifyContent: "center", paddingTop: 100 }}>Loading FinFlow...</div> : (
+                    <>
+                        {page === "dashboard" && <DashboardPage vouchers={vouchers} products={products} accounts={accounts} />}
+                        {page === "purchase" && <VoucherPage type="purchase" vouchers={vouchers} products={products} parties={INITIAL_PARTIES} accounts={accounts} onAdd={createDoubleEntry} />}
+                        {page === "sale" && <VoucherPage type="sale" vouchers={vouchers} products={products} parties={INITIAL_PARTIES} accounts={accounts} onAdd={createDoubleEntry} />}
+                        {page === "journal" && <JournalPage vouchers={vouchers} accounts={accounts} onAdd={createDoubleEntry} />}
+                        {page === "inventory" && <InventoryPage products={products} />}
+                        {page === "ledger" && <LedgerPage vouchers={vouchers} accounts={accounts} />}
+                        {page === "reports" && <ReportsPage vouchers={vouchers} products={products} accounts={accounts} />}
+                    </>
+                )}
             </div>
         </div>
     );
