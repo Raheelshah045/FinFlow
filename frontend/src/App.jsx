@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { Icon } from "./components/Icon";
 import { DashboardPage } from "./pages/DashboardPage";
 import { VoucherPage } from "./pages/VoucherPage";
@@ -6,6 +6,7 @@ import { InventoryPage } from "./pages/InventoryPage";
 import { LedgerPage } from "./pages/LedgerPage";
 import { ReportsPage } from "./pages/ReportsPage";
 import { fmtShort, newId } from "./utils/formatters";
+import * as api from "./services/api";
 
 // Mock data (Normally this would come from the backend)
 import {
@@ -21,8 +22,29 @@ export default function App() {
     const [products, setProducts] = useState(INITIAL_PRODUCTS);
     const [accounts, setAccounts] = useState(INITIAL_ACCOUNTS);
     const [sidebarOpen, setSidebarOpen] = useState(true);
+    const [loading, setLoading] = useState(true);
 
-    const createDoubleEntry = useCallback((voucherData) => {
+    useEffect(() => {
+        const loadData = async () => {
+            try {
+                const [accs, prods, vchs] = await Promise.all([
+                    api.fetchAccounts(),
+                    api.fetchProducts(),
+                    api.fetchVouchers()
+                ]);
+                setAccounts(accs);
+                setProducts(prods);
+                setVouchers(vchs);
+            } catch (error) {
+                console.error("Error loading data from API:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        loadData();
+    }, []);
+
+    const createDoubleEntry = useCallback(async (voucherData) => {
         const { type, items: vItems, paymentMode, total, party, partyId, date } = voucherData;
         const id = newId(type === "purchase" ? "PV" : "SV");
 
@@ -61,9 +83,15 @@ export default function App() {
 
         const newVoucher = { id, type, date, party, paymentMode, total, status: "posted", items: vItems, entries, ...(type === "sale" ? { margin } : {}) };
 
-        setVouchers(prev => [...prev, newVoucher]);
-        setProducts(updatedProducts);
-        setAccounts(updatedAccounts);
+        try {
+            await api.postVoucher(newVoucher);
+            setVouchers(prev => [...prev, newVoucher]);
+            setProducts(updatedProducts);
+            setAccounts(updatedAccounts);
+        } catch (error) {
+            console.error("Error posting voucher:", error);
+            alert("Failed to save transaction to backend.");
+        }
     }, [products, accounts]);
 
     const nav = [
