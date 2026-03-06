@@ -1,5 +1,5 @@
 {
-    "name": "finflow-root",
+    "name": "balancify-root",
     "private": true,
     "scripts": {
         "install:all": "cd frontend && npm install && cd ../backend && npm install",

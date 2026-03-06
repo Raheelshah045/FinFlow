@@ -130,7 +130,7 @@ export default function App() {
                     </div>
                     {sidebarOpen && (
                         <div style={{ overflow: "hidden" }}>
-                            <div style={{ color: "#fff", fontWeight: 900, fontSize: 22, lineHeight: 1, letterSpacing: "-0.03em" }}>FinFlow</div>
+                            <div style={{ color: "#fff", fontWeight: 900, fontSize: 22, lineHeight: 1, letterSpacing: "-0.03em" }}>Balancify</div>
                             <div style={{ color: "#64748b", fontSize: 9, fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 6, whiteSpace: "nowrap" }}>Enterprise Resource Planning</div>
                         </div>
                     )}
@@ -173,7 +173,7 @@ export default function App() {
 
             {/* MAIN CONTENT */}
             <div style={{ flex: 1, overflow: "auto", padding: 28 }}>
-                {loading ? <div style={{ display: "flex", justifyContent: "center", paddingTop: 100 }}>Loading FinFlow...</div> : (
+                {loading ? <div style={{ display: "flex", justifyContent: "center", paddingTop: 100 }}>Loading Balancify...</div> : (
                     <>
                         {page === "dashboard" && <DashboardPage vouchers={vouchers} products={products} accounts={accounts} />}
                         {page === "purchase" && <VoucherPage type="purchase" vouchers={vouchers} products={products} parties={INITIAL_PARTIES} accounts={accounts} onAdd={createDoubleEntry} />}
