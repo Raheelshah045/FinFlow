@@ -123,15 +123,15 @@ export default function App() {
       `}</style>
 
             {/* SIDEBAR */}
-            <div style={{ width: sidebarOpen ? 260 : 64, background: "#0f172a", display: "flex", flexDirection: "column", flexShrink: 0, transition: "width 0.25s ease", overflow: "hidden" }}>
-                <div style={{ padding: "24px 20px", borderBottom: "1px solid rgba(255,255,255,0.08)", display: "flex", alignItems: "center", gap: 14, minHeight: 90 }}>
-                    <div style={{ width: 52, height: 52, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                        <img src="/logo.png" alt="FinFlow Logo" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+            <div style={{ width: sidebarOpen ? 280 : 72, background: "#0f172a", display: "flex", flexDirection: "column", flexShrink: 0, transition: "width 0.25s ease", overflow: "hidden" }}>
+                <div style={{ padding: sidebarOpen ? "24px 20px" : "24px 0", borderBottom: "1px solid rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: sidebarOpen ? "flex-start" : "center", gap: 14, minHeight: 90 }}>
+                    <div style={{ width: sidebarOpen ? 52 : 44, height: sidebarOpen ? 52 : 44, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <img src="/logo.png" alt="Balancify Logo" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
                     </div>
                     {sidebarOpen && (
-                        <div style={{ overflow: "hidden" }}>
+                        <div style={{ overflow: "hidden", flex: 1 }}>
                             <div style={{ color: "#fff", fontWeight: 900, fontSize: 22, lineHeight: 1, letterSpacing: "-0.03em" }}>Balancify</div>
-                            <div style={{ color: "#64748b", fontSize: 9, fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 6, whiteSpace: "nowrap" }}>Enterprise Resource Planning</div>
+                            <div style={{ color: "#64748b", fontSize: 9, fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 6, opacity: 0.8, lineHeight: 1.4 }}>Enterprise Resource Planning</div>
                         </div>
                     )}
                 </div>
