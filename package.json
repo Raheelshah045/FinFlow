@@ -1,0 +1,9 @@
+{
+    "name": "finflow-root",
+    "private": true,
+    "scripts": {
+        "install:all": "cd frontend && npm install && cd ../backend && npm install",
+        "build:frontend": "cd frontend && npm install && npm run build",
+        "start:backend": "cd backend && npm install && npm start"
+    }
+}
