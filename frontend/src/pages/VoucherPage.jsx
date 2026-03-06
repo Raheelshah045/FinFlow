@@ -9,8 +9,30 @@ import { fmt } from "../utils/formatters";
 export const VoucherPage = ({ type, vouchers, products, parties, accounts, onAdd }) => {
     const [showForm, setShowForm] = useState(false);
     const [toast, setToast] = useState(null);
+    const [fromDate, setFromDate] = useState("");
+    const [toDate, setToDate] = useState("");
+    const [searchQuery, setSearchQuery] = useState("");
 
-    const filtered = vouchers.filter(v => v.type === type);
+    const filtered = vouchers.filter(v => {
+        // Type filter
+        if (v.type !== type) return false;
+
+        // Date range filter
+        if (fromDate && v.date < fromDate) return false;
+        if (toDate && v.date > toDate) return false;
+
+        // Search query filter (Client, ID, or Product name)
+        if (searchQuery) {
+            const query = searchQuery.toLowerCase();
+            const matchId = v.id.toLowerCase().includes(query);
+            const matchParty = v.party.toLowerCase().includes(query);
+            const matchProduct = v.items.some(it => it.name.toLowerCase().includes(query));
+            if (!matchId && !matchParty && !matchProduct) return false;
+        }
+
+        return true;
+    });
+
     const total = filtered.reduce((s, v) => s + v.total, 0);
 
     const handleSubmit = (data) => {
@@ -38,8 +60,32 @@ export const VoucherPage = ({ type, vouchers, products, parties, accounts, onAdd
                 </button>
             </div>
 
+            <div style={{ background: "#fff", border: "1.5px solid #e2e8f0", borderRadius: 14, padding: "16px 24px", marginBottom: 20, display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap", justifyContent: "space-between" }}>
+                <div style={{ position: "relative", flex: 1, minWidth: 260 }}>
+                    <span style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "#94a3b8" }}><Icon name="search" size={15} /></span>
+                    <input
+                        value={searchQuery}
+                        onChange={e => setSearchQuery(e.target.value)}
+                        placeholder="Search by Voucher #, Client, or Product name..."
+                        style={{ width: "100%", padding: "10px 14px 10px 38px", border: "1.5px solid #e2e8f0", borderRadius: 10, fontSize: 13, outline: "none", background: "#f8fafc", boxSizing: "border-box", fontFamily: "inherit" }}
+                    />
+                </div>
+
+                <div style={{ display: "flex", alignItems: "center", gap: 10, background: "#f8fafc", padding: "8px 16px", borderRadius: 10, border: "1.5px solid #e2e8f0" }}>
+                    <span style={{ fontSize: 12, fontWeight: 700, color: "#64748b" }}>Date Range:</span>
+                    <input type="date" value={fromDate} onChange={e => setFromDate(e.target.value)} style={{ border: "none", fontSize: 13, fontWeight: 600, color: "#0f172a", outline: "none", background: "transparent", cursor: "pointer" }} />
+                    <span style={{ color: "#cbd5e1" }}>→</span>
+                    <input type="date" value={toDate} onChange={e => setToDate(e.target.value)} style={{ border: "none", fontSize: 13, fontWeight: 600, color: "#0f172a", outline: "none", background: "transparent", cursor: "pointer" }} />
+                    {(fromDate || toDate || searchQuery) && (
+                        <button onClick={() => { setFromDate(""); setToDate(""); setSearchQuery(""); }} style={{ border: "none", background: "none", padding: "0 4px", color: "#94a3b8", cursor: "pointer", display: "flex", alignItems: "center" }}>
+                            <Icon name="close" size={14} />
+                        </button>
+                    )}
+                </div>
+            </div>
+
             <div style={{ background: "#fff", border: "1.5px solid #e2e8f0", borderRadius: 14, padding: 24 }}>
-                <DataTable columns={[
+                <DataTable searchable={false} columns={[
                     { key: "id", label: "Voucher #" },
                     { key: "date", label: "Date" },
                     { key: "party", label: type === "purchase" ? "Vendor" : "Client" },
