@@ -91,6 +91,18 @@ app.post('/api/vouchers', (req, res) => {
     res.status(201).json({ voucher, products, accounts });
 });
 
+app.post('/api/products', (req, res) => {
+    const product = req.body;
+    products.push(product);
+    res.status(201).json(product);
+});
+
+app.post('/api/parties', (req, res) => {
+    const party = req.body;
+    parties.push(party);
+    res.status(201).json(party);
+});
+
 app.listen(port, () => {
     console.log(`Backend server running at http://localhost:${port}`);
 });

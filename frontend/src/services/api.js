@@ -1,4 +1,5 @@
-const API_BASE_URL = 'https://finflow-1-oqg2.onrender.com/api';
+const API_BASE_URL = 'http://localhost:5000/api'; // Local Backend
+// const API_BASE_URL = 'https://finflow-1-oqg2.onrender.com/api'; // Deployed Backend
 
 export const fetchDashboardData = async () => {
     const response = await fetch(`${API_BASE_URL}/dashboard`);
@@ -24,6 +25,12 @@ export const fetchVouchers = async () => {
     return response.json();
 };
 
+export const fetchParties = async () => {
+    const response = await fetch(`${API_BASE_URL}/parties`);
+    if (!response.ok) throw new Error('Failed to fetch parties');
+    return response.json();
+};
+
 export const postVoucher = async (voucherData) => {
     const response = await fetch(`${API_BASE_URL}/vouchers`, {
         method: 'POST',
@@ -31,5 +38,25 @@ export const postVoucher = async (voucherData) => {
         body: JSON.stringify(voucherData),
     });
     if (!response.ok) throw new Error('Failed to post voucher');
+    return response.json();
+};
+
+export const postProduct = async (productData) => {
+    const response = await fetch(`${API_BASE_URL}/products`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(productData),
+    });
+    if (!response.ok) throw new Error('Failed to post product');
+    return response.json();
+};
+
+export const postParty = async (partyData) => {
+    const response = await fetch(`${API_BASE_URL}/parties`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(partyData),
+    });
+    if (!response.ok) throw new Error('Failed to post party');
     return response.json();
 };

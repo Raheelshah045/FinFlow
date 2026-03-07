@@ -6,6 +6,7 @@ import { InventoryPage } from "./pages/InventoryPage";
 import { LedgerPage } from "./pages/LedgerPage";
 import { ReportsPage } from "./pages/ReportsPage";
 import { JournalPage } from "./pages/JournalPage";
+import { PartiesPage } from "./pages/PartiesPage";
 import { fmtShort, newId } from "./utils/formatters";
 import * as api from "./services/api";
 
@@ -21,6 +22,7 @@ export default function App() {
     const [page, setPage] = useState("dashboard");
     const [vouchers, setVouchers] = useState(INITIAL_VOUCHERS);
     const [products, setProducts] = useState(INITIAL_PRODUCTS);
+    const [parties, setParties] = useState(INITIAL_PARTIES);
     const [accounts, setAccounts] = useState(INITIAL_ACCOUNTS);
     const [sidebarOpen, setSidebarOpen] = useState(true);
     const [loading, setLoading] = useState(true);
@@ -28,14 +30,16 @@ export default function App() {
     useEffect(() => {
         const loadData = async () => {
             try {
-                const [accs, prods, vchs] = await Promise.all([
+                const [accs, prods, vchs, pts] = await Promise.all([
                     api.fetchAccounts(),
                     api.fetchProducts(),
-                    api.fetchVouchers()
+                    api.fetchVouchers(),
+                    api.fetchParties()
                 ]);
                 setAccounts(accs);
                 setProducts(prods);
                 setVouchers(vchs);
+                setParties(pts);
             } catch (error) {
                 console.error("Error loading data from API:", error);
             } finally {
@@ -95,12 +99,33 @@ export default function App() {
         }
     }, [products, accounts]);
 
+    const addProduct = async (newProduct) => {
+        try {
+            const savedProduct = await api.postProduct(newProduct);
+            setProducts(prev => [...prev, savedProduct]);
+        } catch (error) {
+            console.error("Error adding product:", error);
+            alert("Failed to add product.");
+        }
+    };
+
+    const addParty = async (newParty) => {
+        try {
+            const savedParty = await api.postParty(newParty);
+            setParties(prev => [...prev, savedParty]);
+        } catch (error) {
+            console.error("Error adding party:", error);
+            alert("Failed to add party.");
+        }
+    };
+
     const nav = [
         { id: "dashboard", label: "Dashboard", icon: "dashboard" },
         { id: "purchase", label: "Purchase Vouchers", icon: "purchase" },
         { id: "sale", label: "Sales Vouchers", icon: "sale" },
         { id: "journal", label: "Journal Vouchers", icon: "reports" },
         { id: "inventory", label: "Inventory", icon: "inventory" },
+        { id: "parties", label: "Parties (Vendors)", icon: "users" },
         { id: "ledger", label: "Bank Ledger", icon: "bank" },
         { id: "reports", label: "P&L Reports", icon: "trend_up" },
     ];
@@ -176,10 +201,11 @@ export default function App() {
                 {loading ? <div style={{ display: "flex", justifyContent: "center", paddingTop: 100 }}>Loading Balancify...</div> : (
                     <>
                         {page === "dashboard" && <DashboardPage vouchers={vouchers} products={products} accounts={accounts} />}
-                        {page === "purchase" && <VoucherPage type="purchase" vouchers={vouchers} products={products} parties={INITIAL_PARTIES} accounts={accounts} onAdd={createDoubleEntry} />}
-                        {page === "sale" && <VoucherPage type="sale" vouchers={vouchers} products={products} parties={INITIAL_PARTIES} accounts={accounts} onAdd={createDoubleEntry} />}
+                        {page === "purchase" && <VoucherPage type="purchase" vouchers={vouchers} products={products} parties={parties} accounts={accounts} onAdd={createDoubleEntry} />}
+                        {page === "sale" && <VoucherPage type="sale" vouchers={vouchers} products={products} parties={parties} accounts={accounts} onAdd={createDoubleEntry} />}
                         {page === "journal" && <JournalPage vouchers={vouchers} accounts={accounts} onAdd={createDoubleEntry} />}
-                        {page === "inventory" && <InventoryPage products={products} />}
+                        {page === "inventory" && <InventoryPage products={products} onAdd={addProduct} />}
+                        {page === "parties" && <PartiesPage parties={parties} onAdd={addParty} />}
                         {page === "ledger" && <LedgerPage vouchers={vouchers} accounts={accounts} />}
                         {page === "reports" && <ReportsPage vouchers={vouchers} products={products} accounts={accounts} />}
                     </>
