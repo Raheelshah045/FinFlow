@@ -24,7 +24,7 @@ export default function App() {
     const [products, setProducts] = useState(INITIAL_PRODUCTS);
     const [parties, setParties] = useState(INITIAL_PARTIES);
     const [accounts, setAccounts] = useState(INITIAL_ACCOUNTS);
-    const [sidebarOpen, setSidebarOpen] = useState(true);
+    const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth > 768);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -145,10 +145,78 @@ export default function App() {
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         select, input { font-family: inherit; }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed !important;
+                z-index: 50;
+                height: 100% !important;
+                left: 0;
+                top: 0;
+                transform: translateX(-100%);
+            }
+            .sidebar.mobile-open {
+                transform: translateX(0);
+                width: 280px !important;
+            }
+            .main-content {
+                padding: 16px !important;
+            }
+            .mobile-header {
+                display: flex !important;
+            }
+            .sidebar-overlay {
+                display: block !important;
+            }
+            .grid-1-1 {
+                grid-template-columns: 1fr !important;
+            }
+            .item-row {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 12px !important;
+            }
+            .item-row > div:nth-child(1) { grid-column: span 2; }
+            .item-row > div:nth-child(2) { grid-column: span 1; }
+            .item-row > div:nth-child(3) { grid-column: span 1; }
+            .item-header-row {
+                display: none !important;
+            }
+            .voucher-top-bar {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 12px !important;
+            }
+            .voucher-filters {
+                flex-direction: column !important;
+                align-items: stretch !important;
+            }
+            .voucher-filters > div {
+                width: 100% !important;
+            }
+        }
       `}</style>
 
+            {/* SIDEBAR OVERLAY FOR MOBILE */}
+            <div
+                className="sidebar-overlay"
+                onClick={() => setSidebarOpen(false)}
+                style={{
+                    display: "none",
+                    position: "fixed",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    background: "rgba(0,0,0,0.5)",
+                    zIndex: 40,
+                    opacity: sidebarOpen ? 1 : 0,
+                    pointerEvents: sidebarOpen ? "auto" : "none",
+                    transition: "opacity 0.25s ease"
+                }}
+            />
+
             {/* SIDEBAR */}
-            <div style={{ width: sidebarOpen ? 280 : 72, background: "#0f172a", display: "flex", flexDirection: "column", flexShrink: 0, transition: "width 0.25s ease", overflow: "hidden" }}>
+            <div className={`sidebar ${sidebarOpen ? 'mobile-open' : ''}`} style={{ width: sidebarOpen ? 280 : 72, background: "#0f172a", display: "flex", flexDirection: "column", flexShrink: 0, transition: "all 0.25s ease", overflow: "hidden" }}>
                 <div style={{ padding: sidebarOpen ? "24px 20px" : "24px 0", borderBottom: "1px solid rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: sidebarOpen ? "flex-start" : "center", gap: 14, minHeight: 90 }}>
                     <div style={{ width: sidebarOpen ? 52 : 44, height: sidebarOpen ? 52 : 44, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
                         <img src="/logo.png" alt="Balancify Logo" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
@@ -197,7 +265,20 @@ export default function App() {
             </div>
 
             {/* MAIN CONTENT */}
-            <div style={{ flex: 1, overflow: "auto", padding: 28 }}>
+            <div className="main-content" style={{ flex: 1, overflow: "auto", padding: 28, display: "flex", flexDirection: "column" }}>
+                {/* MOBILE HEADER */}
+                <div className="mobile-header" style={{ display: "none", alignItems: "center", justifyContent: "space-between", marginBottom: 20, padding: "4px 0" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                        <img src="/logo.png" alt="Logo" style={{ width: 32, height: 32 }} />
+                        <span style={{ fontWeight: 800, color: "#0f172a", fontSize: 18 }}>Balancify</span>
+                    </div>
+                    <button
+                        onClick={() => setSidebarOpen(true)}
+                        style={{ background: "#fff", border: "1.5px solid #e2e8f0", borderRadius: 8, padding: 8, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}
+                    >
+                        <Icon name="menu" size={20} color="#0f172a" />
+                    </button>
+                </div>
                 {loading ? <div style={{ display: "flex", justifyContent: "center", paddingTop: 100 }}>Loading Balancify...</div> : (
                     <>
                         {page === "dashboard" && <DashboardPage vouchers={vouchers} products={products} accounts={accounts} />}

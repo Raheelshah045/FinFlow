@@ -99,7 +99,7 @@ export const TransactionForm = ({ type, products, parties, accounts, onSubmit, o
     return (
         <div>
             {/* Header Fields */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
+            <div className="grid-1-1" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
                 <div>
                     <label style={labelStyle}>Date</label>
                     <input type="date" value={date} onChange={e => setDate(e.target.value)} style={inputStyle(errors.date)} />
@@ -147,13 +147,13 @@ export const TransactionForm = ({ type, products, parties, accounts, onSubmit, o
                 </button>
             </div>
             <div style={{ border: "1.5px solid #e2e8f0", borderRadius: 10, overflow: "hidden", marginBottom: 16 }}>
-                <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1.2fr auto", gap: 0, background: "#f8fafc", padding: "8px 14px", fontSize: 11, fontWeight: 700, color: "#64748b", letterSpacing: "0.07em", textTransform: "uppercase" }}>
+                <div className="item-header-row" style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1.2fr auto", gap: 0, background: "#f8fafc", padding: "8px 14px", fontSize: 11, fontWeight: 700, color: "#64748b", letterSpacing: "0.07em", textTransform: "uppercase" }}>
                     <span>Product</span><span>Qty</span><span>Unit Price</span><span></span>
                 </div>
                 {items.map((item, i) => {
                     const prod = products.find(p => p.id === item.productId);
                     return (
-                        <div key={i} style={{ padding: "10px 14px", borderTop: "1px solid #f1f5f9", display: "grid", gridTemplateColumns: "2fr 1fr 1.2fr auto", gap: 8, alignItems: "start" }}>
+                        <div key={i} className="item-row" style={{ padding: "10px 14px", borderTop: "1px solid #f1f5f9", display: "grid", gridTemplateColumns: "2fr 1fr 1.2fr auto", gap: 8, alignItems: "start" }}>
                             <div>
                                 <select value={item.productId} onChange={e => updateItem(i, "productId", e.target.value)} style={{ ...inputStyle(errors[`item_${i}`]), padding: "8px 10px" }}>
                                     <option value="">-- Select --</option>

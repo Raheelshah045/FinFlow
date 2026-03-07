@@ -22,7 +22,7 @@ export const PartiesPage = ({ parties, onAdd }) => {
 
     return (
         <div style={{ animation: "fadeUp 0.3s ease-out" }}>
-            <div style={{ marginBottom: 24, display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
+            <div className="voucher-top-bar" style={{ marginBottom: 24, display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
                 <div>
                     <h1 style={{ fontSize: 24, fontWeight: 800, color: "#0f172a", margin: "0 0 4px" }}>Vendor Management</h1>
                     <p style={{ color: "#64748b", margin: 0, fontSize: 14 }}>Manage your suppliers and service providers</p>

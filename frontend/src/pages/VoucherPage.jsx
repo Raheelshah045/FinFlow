@@ -50,7 +50,7 @@ export const VoucherPage = ({ type, vouchers, products, parties, accounts, onAdd
                 </div>
             )}
 
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 24 }}>
+            <div className="voucher-top-bar" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 24 }}>
                 <div>
                     <h1 style={{ fontSize: 24, fontWeight: 800, color: "#0f172a", margin: "0 0 4px" }}>{type === "purchase" ? "Purchase Vouchers" : "Sales Vouchers"}</h1>
                     <p style={{ color: "#64748b", margin: 0, fontSize: 14 }}>Total: {fmt(total)} across {filtered.length} vouchers</p>
@@ -60,7 +60,7 @@ export const VoucherPage = ({ type, vouchers, products, parties, accounts, onAdd
                 </button>
             </div>
 
-            <div style={{ background: "#fff", border: "1.5px solid #e2e8f0", borderRadius: 14, padding: "16px 24px", marginBottom: 20, display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap", justifyContent: "space-between" }}>
+            <div className="voucher-filters" style={{ background: "#fff", border: "1.5px solid #e2e8f0", borderRadius: 14, padding: "16px 24px", marginBottom: 20, display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap", justifyContent: "space-between" }}>
                 <div style={{ position: "relative", flex: 1, minWidth: 260 }}>
                     <span style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "#94a3b8" }}><Icon name="search" size={15} /></span>
                     <input

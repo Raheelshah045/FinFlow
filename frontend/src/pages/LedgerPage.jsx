@@ -71,7 +71,7 @@ export const LedgerPage = ({ vouchers, accounts }) => {
 
     return (
         <div style={{ animation: "fadeUp 0.3s ease-out" }}>
-            <div style={{ marginBottom: 24, display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
+            <div className="voucher-top-bar" style={{ marginBottom: 24, display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
                 <div>
                     <h1 style={{ fontSize: 24, fontWeight: 800, color: "#0f172a", margin: "0 0 4px" }}>Account Ledger</h1>
                     <p style={{ color: "#64748b", margin: 0, fontSize: 14 }}>Running balance and transaction history</p>
@@ -79,7 +79,7 @@ export const LedgerPage = ({ vouchers, accounts }) => {
 
             </div>
 
-            <div style={{ display: "flex", gap: 10, marginBottom: 20, flexWrap: "wrap", alignItems: "center", justifyContent: "space-between" }}>
+            <div className="voucher-filters" style={{ display: "flex", gap: 10, marginBottom: 20, flexWrap: "wrap", alignItems: "center", justifyContent: "space-between" }}>
                 <div style={{ display: "flex", gap: 10 }}>
                     {accounts.filter(a => ["cash", "bank"].includes(a.id)).map(a => (
                         <button key={a.id} onClick={() => setActiveAccount(a.id)} style={{ padding: "9px 18px", border: `2px solid ${activeAccount === a.id ? "#1e40af" : "#e2e8f0"}`, borderRadius: 9, background: activeAccount === a.id ? "#1e40af" : "#fff", color: activeAccount === a.id ? "#fff" : "#475569", fontWeight: 700, fontSize: 13, cursor: "pointer", fontFamily: "inherit", display: "flex", alignItems: "center", gap: 7, transition: "all 0.15s" }}>

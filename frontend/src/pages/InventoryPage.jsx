@@ -25,7 +25,7 @@ export const InventoryPage = ({ products, onAdd }) => {
 
     return (
         <div style={{ animation: "fadeUp 0.3s ease-out" }}>
-            <div style={{ marginBottom: 24, display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
+            <div className="voucher-top-bar" style={{ marginBottom: 24, display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
                 <div>
                     <h1 style={{ fontSize: 24, fontWeight: 800, color: "#0f172a", margin: "0 0 4px" }}>Inventory Manager</h1>
                     <p style={{ color: "#64748b", margin: 0, fontSize: 14 }}>Track stock levels, prices, and valuation</p>
@@ -75,7 +75,7 @@ export const InventoryPage = ({ products, onAdd }) => {
             </div>
 
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Add New Product">
-                <form onSubmit={handleSubmit} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+                <form onSubmit={handleSubmit} className="grid-1-1" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
                     <div style={{ gridColumn: "span 2" }}>
                         <label style={{ display: "block", fontSize: 13, fontWeight: 600, color: "#475569", marginBottom: 6 }}>Product Name</label>
                         <input required type="text" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} placeholder="e.g. MacBook Pro M3" style={{ width: "100%", padding: "10px 12px", borderRadius: 8, border: "1.5px solid #e2e8f0", outline: "none" }} />

@@ -28,7 +28,7 @@ export const JournalPage = ({ vouchers, accounts, onAdd }) => {
                 </div>
             )}
 
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 24 }}>
+            <div className="voucher-top-bar" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 24 }}>
                 <div>
                     <h1 style={{ fontSize: 24, fontWeight: 800, color: "#0f172a", margin: "0 0 4px" }}>Journal Vouchers (JV)</h1>
                     <p style={{ color: "#64748b", margin: 0, fontSize: 14 }}>Non-inventory adjustments & transfers</p>

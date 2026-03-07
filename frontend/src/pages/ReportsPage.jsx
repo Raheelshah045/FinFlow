@@ -24,7 +24,7 @@ export const ReportsPage = ({ vouchers, products, accounts }) => {
                 <p style={{ color: "#64748b", margin: 0, fontSize: 14 }}>Financial performance summary</p>
             </div>
 
-            <div style={{ display: "flex", gap: 12, alignItems: "center", marginBottom: 24, background: "#fff", border: "1.5px solid #e2e8f0", borderRadius: 12, padding: "14px 18px" }}>
+            <div className="voucher-filters" style={{ display: "flex", gap: 12, alignItems: "center", marginBottom: 24, background: "#fff", border: "1.5px solid #e2e8f0", borderRadius: 12, padding: "14px 18px" }}>
                 <span style={{ fontSize: 13, fontWeight: 600, color: "#475569" }}>Period:</span>
                 <input type="date" value={dateFrom} onChange={e => setDateFrom(e.target.value)} style={{ padding: "8px 12px", border: "1.5px solid #e2e8f0", borderRadius: 8, fontSize: 13, fontFamily: "inherit", outline: "none" }} />
                 <span style={{ color: "#94a3b8" }}>to</span>
@@ -39,7 +39,7 @@ export const ReportsPage = ({ vouchers, products, accounts }) => {
                 </div>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginBottom: 20 }}>
+            <div className="grid-1-1" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginBottom: 20 }}>
                 <div style={{ background: "#fff", border: "1.5px solid #e2e8f0", borderRadius: 14, overflow: "hidden" }}>
                     <div style={{ background: "#0f172a", padding: "14px 20px" }}>
                         <h3 style={{ margin: 0, fontSize: 14, fontWeight: 700, color: "#fff" }}>Income Statement</h3>
