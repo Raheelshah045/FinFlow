@@ -201,8 +201,8 @@ export default function App() {
                 {loading ? <div style={{ display: "flex", justifyContent: "center", paddingTop: 100 }}>Loading Balancify...</div> : (
                     <>
                         {page === "dashboard" && <DashboardPage vouchers={vouchers} products={products} accounts={accounts} />}
-                        {page === "purchase" && <VoucherPage type="purchase" vouchers={vouchers} products={products} parties={parties} accounts={accounts} onAdd={createDoubleEntry} />}
-                        {page === "sale" && <VoucherPage type="sale" vouchers={vouchers} products={products} parties={parties} accounts={accounts} onAdd={createDoubleEntry} />}
+                        {page === "purchase" && <VoucherPage type="purchase" vouchers={vouchers} products={products} parties={parties} accounts={accounts} onAdd={createDoubleEntry} onAddVendor={addParty} onAddProduct={addProduct} />}
+                        {page === "sale" && <VoucherPage type="sale" vouchers={vouchers} products={products} parties={parties} accounts={accounts} onAdd={createDoubleEntry} onAddVendor={addParty} onAddProduct={addProduct} />}
                         {page === "journal" && <JournalPage vouchers={vouchers} accounts={accounts} onAdd={createDoubleEntry} />}
                         {page === "inventory" && <InventoryPage products={products} onAdd={addProduct} />}
                         {page === "parties" && <PartiesPage parties={parties} onAdd={addParty} />}

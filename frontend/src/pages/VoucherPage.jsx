@@ -6,7 +6,7 @@ import { Modal } from "../components/Modal";
 import { TransactionForm } from "../components/TransactionForm";
 import { fmt } from "../utils/formatters";
 
-export const VoucherPage = ({ type, vouchers, products, parties, accounts, onAdd }) => {
+export const VoucherPage = ({ type, vouchers, products, parties, accounts, onAdd, onAddVendor, onAddProduct }) => {
     const [showForm, setShowForm] = useState(false);
     const [toast, setToast] = useState(null);
     const [fromDate, setFromDate] = useState("");
@@ -116,7 +116,16 @@ export const VoucherPage = ({ type, vouchers, products, parties, accounts, onAdd
             </div>
 
             <Modal open={showForm} onClose={() => setShowForm(false)} title={`New ${type === "purchase" ? "Purchase" : "Sale"} Voucher`} width={720}>
-                <TransactionForm type={type} products={products} parties={parties} accounts={accounts} onSubmit={handleSubmit} onClose={() => setShowForm(false)} />
+                <TransactionForm
+                    type={type}
+                    products={products}
+                    parties={parties}
+                    accounts={accounts}
+                    onSubmit={handleSubmit}
+                    onClose={() => setShowForm(false)}
+                    onAddVendor={onAddVendor}
+                    onAddProduct={onAddProduct}
+                />
             </Modal>
         </div>
     );
