@@ -17,7 +17,6 @@ export const TransactionForm = ({ type, products, parties, accounts, onSubmit, o
     const [newProductForm, setNewProductForm] = useState({ name: "", sku: "", purchasePrice: 0, salePrice: 0, stock: 0 });
 
     const filteredParties = parties.filter(p =>
-        (type === "purchase" ? p.type === "vendor" : p.type === "client") &&
         p.name.toLowerCase().includes(partySearch.toLowerCase())
     );
 
@@ -41,7 +40,7 @@ export const TransactionForm = ({ type, products, parties, accounts, onSubmit, o
     const validate = () => {
         const errs = {};
         if (type === "purchase" && !partyId) errs.party = "Vendor required";
-        if (type === "sale" && !partySearch.trim()) errs.party = "Client name required";
+        if (type === "sale" && !partySearch.trim()) errs.party = "Customer name required";
         if (!date) errs.date = "Date required";
         items.forEach((it, i) => {
             if (!it.productId) errs[`item_${i}`] = "Select product";
@@ -85,7 +84,7 @@ export const TransactionForm = ({ type, products, parties, accounts, onSubmit, o
         if (!validate()) return;
         const party = parties.find(p => p.id === partyId);
         const finalPartyName = party ? party.name : partySearch;
-        const finalPartyId = partyId || (type === "sale" ? `C-NEW-${Date.now()}` : "new-vendor");
+        const finalPartyId = partyId || (type === "sale" ? `IND-${Date.now()}` : "new-vendor");
 
         const voucherItems = items.map(it => {
             const prod = products.find(p => p.id === it.productId);
@@ -117,15 +116,15 @@ export const TransactionForm = ({ type, products, parties, accounts, onSubmit, o
             {/* Party Selection */}
             <div style={{ marginBottom: 16 }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 5 }}>
-                    <label style={{ ...labelStyle, margin: 0 }}>{type === "purchase" ? "Vendor" : "Client"}</label>
+                    <label style={{ ...labelStyle, margin: 0 }}>{type === "purchase" ? "Vendor" : "Customer Name"}</label>
                     {type === "purchase" && onAddVendor && (
                         <button onClick={() => setShowNewVendorModal(true)} style={{ background: "none", border: "none", color: "#3b82f6", fontSize: 11, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 3 }}>
                             <Icon name="plus" size={10} /> Add New Vendor
                         </button>
                     )}
-                    {type === "sale" && <span style={{ fontSize: 10, color: "#94a3b8", fontWeight: 500 }}>(Accepts new names)</span>}
+                    {type === "sale" && <span style={{ fontSize: 10, color: "#94a3b8", fontWeight: 500 }}>(Enter name)</span>}
                 </div>
-                <input value={partySearch} onChange={e => { setPartySearch(e.target.value); if (partyId) setPartyId(""); }} placeholder={`Enter ${type === "purchase" ? "vendor" : "client"} name...`} style={inputStyle(errors.party)} />
+                <input value={partySearch} onChange={e => { setPartySearch(e.target.value); if (partyId) setPartyId(""); }} placeholder={`Enter ${type === "purchase" ? "vendor" : "customer"} name...`} style={inputStyle(errors.party)} />
                 {partySearch && filteredParties.length > 0 && !partyId && (
                     <div style={{ border: "1.5px solid #e2e8f0", borderRadius: 8, marginTop: 4, maxHeight: 140, overflowY: "auto", background: "#fff", boxShadow: "0 8px 24px rgba(0,0,0,0.1)" }}>
                         {filteredParties.map(p => (

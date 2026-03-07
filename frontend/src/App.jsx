@@ -125,7 +125,7 @@ export default function App() {
         { id: "sale", label: "Sales Vouchers", icon: "sale" },
         { id: "journal", label: "Journal Vouchers", icon: "reports" },
         { id: "inventory", label: "Inventory", icon: "inventory" },
-        { id: "parties", label: "Parties (Vendors)", icon: "users" },
+        { id: "parties", label: "Vendors", icon: "users" },
         { id: "ledger", label: "Bank Ledger", icon: "bank" },
         { id: "reports", label: "P&L Reports", icon: "trend_up" },
     ];

@@ -18,9 +18,9 @@ export const INITIAL_PRODUCTS = [
 export const INITIAL_PARTIES = [
     { id: "v1", name: "Tech Distributors Ltd.", type: "vendor" },
     { id: "v2", name: "Global Electronics Co.", type: "vendor" },
-    { id: "c1", name: "Karachi Systems Inc.", type: "client" },
-    { id: "c2", name: "Lahore Tech Solutions", type: "client" },
-    { id: "c3", name: "Islamabad IT Hub", type: "client" },
+    { id: "v3", name: "Karachi Systems Inc.", type: "vendor" },
+    { id: "v4", name: "Lahore Tech Solutions", type: "vendor" },
+    { id: "v5", name: "Islamabad IT Hub", type: "vendor" },
 ];
 
 export const INITIAL_VOUCHERS = [

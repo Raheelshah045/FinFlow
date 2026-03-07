@@ -39,7 +39,7 @@ export const InventoryPage = ({ products, onAdd }) => {
             </div>
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16, marginBottom: 24 }}>
-                <StatCard label="Total Products" value={products.length} sub="Active SKUs" accent="blue" />
+                <StatCard label="Total Products" value={products.length} sub="Active SKUs" accent="blue" isCurrency={false} />
                 <StatCard label="Stock Value" value={products.reduce((s, p) => s + p.stock * p.purchasePrice, 0)} sub="At purchase cost" accent="green" />
                 <StatCard label="Potential Revenue" value={products.reduce((s, p) => s + p.stock * p.salePrice, 0)} sub="At sale price" accent="amber" />
             </div>

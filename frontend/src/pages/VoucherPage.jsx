@@ -66,7 +66,7 @@ export const VoucherPage = ({ type, vouchers, products, parties, accounts, onAdd
                     <input
                         value={searchQuery}
                         onChange={e => setSearchQuery(e.target.value)}
-                        placeholder="Search by Voucher #, Client, or Product name..."
+                        placeholder={`Search by Voucher #, ${type === "purchase" ? "Vendor" : "Customer"}, or Product name...`}
                         style={{ width: "100%", padding: "10px 14px 10px 38px", border: "1.5px solid #e2e8f0", borderRadius: 10, fontSize: 13, outline: "none", background: "#f8fafc", boxSizing: "border-box", fontFamily: "inherit" }}
                     />
                 </div>
@@ -88,7 +88,7 @@ export const VoucherPage = ({ type, vouchers, products, parties, accounts, onAdd
                 <DataTable searchable={false} columns={[
                     { key: "id", label: "Voucher #" },
                     { key: "date", label: "Date" },
-                    { key: "party", label: type === "purchase" ? "Vendor" : "Client" },
+                    { key: "party", label: type === "purchase" ? "Vendor" : "Customer" },
                     { key: "paymentMode", label: "Mode", render: v => <Badge color="gray">{v.toUpperCase()}</Badge> },
                     {
                         key: "items",
