@@ -1,32 +1,72 @@
-const API_BASE_URL = 'http://localhost:5000/api'; // Local Backend
-// const API_BASE_URL = 'https://finflow-1-oqg2.onrender.com/api'; // Deployed Backend
+const API_BASE_URL = 'http://localhost:5000/api';
 
-export const fetchDashboardData = async () => {
-    const response = await fetch(`${API_BASE_URL}/dashboard`);
-    if (!response.ok) throw new Error('Failed to fetch dashboard data');
+let currentUser = null;
+
+export const setAuthUser = (user) => {
+    currentUser = user;
+};
+
+const getHeaders = () => {
+    const headers = { 'Content-Type': 'application/json' };
+    if (currentUser) {
+        headers['x-user-id'] = currentUser.username;
+    }
+    return headers;
+};
+
+export const login = async (username, password) => {
+    const response = await fetch(`${API_BASE_URL}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+    });
+    if (!response.ok) throw new Error('Invalid credentials');
+    const user = await response.json();
+    currentUser = user;
+    return user;
+};
+
+export const adminCreateUser = async (userData) => {
+    const response = await fetch(`${API_BASE_URL}/admin/users`, {
+        method: 'POST',
+        headers: getHeaders(),
+        body: JSON.stringify(userData),
+    });
+    if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.error || 'Failed to create user');
+    }
+    return response.json();
+};
+
+export const adminFetchUsers = async () => {
+    const response = await fetch(`${API_BASE_URL}/admin/users`, {
+        headers: getHeaders(),
+    });
+    if (!response.ok) throw new Error('Failed to fetch users');
     return response.json();
 };
 
 export const fetchAccounts = async () => {
-    const response = await fetch(`${API_BASE_URL}/accounts`);
+    const response = await fetch(`${API_BASE_URL}/accounts`, { headers: getHeaders() });
     if (!response.ok) throw new Error('Failed to fetch accounts');
     return response.json();
 };
 
 export const fetchProducts = async () => {
-    const response = await fetch(`${API_BASE_URL}/products`);
+    const response = await fetch(`${API_BASE_URL}/products`, { headers: getHeaders() });
     if (!response.ok) throw new Error('Failed to fetch products');
     return response.json();
 };
 
 export const fetchVouchers = async () => {
-    const response = await fetch(`${API_BASE_URL}/vouchers`);
+    const response = await fetch(`${API_BASE_URL}/vouchers`, { headers: getHeaders() });
     if (!response.ok) throw new Error('Failed to fetch vouchers');
     return response.json();
 };
 
 export const fetchParties = async () => {
-    const response = await fetch(`${API_BASE_URL}/parties`);
+    const response = await fetch(`${API_BASE_URL}/parties`, { headers: getHeaders() });
     if (!response.ok) throw new Error('Failed to fetch parties');
     return response.json();
 };
@@ -34,7 +74,7 @@ export const fetchParties = async () => {
 export const postVoucher = async (voucherData) => {
     const response = await fetch(`${API_BASE_URL}/vouchers`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: getHeaders(),
         body: JSON.stringify(voucherData),
     });
     if (!response.ok) throw new Error('Failed to post voucher');
@@ -44,7 +84,7 @@ export const postVoucher = async (voucherData) => {
 export const postProduct = async (productData) => {
     const response = await fetch(`${API_BASE_URL}/products`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: getHeaders(),
         body: JSON.stringify(productData),
     });
     if (!response.ok) throw new Error('Failed to post product');
@@ -54,7 +94,7 @@ export const postProduct = async (productData) => {
 export const postParty = async (partyData) => {
     const response = await fetch(`${API_BASE_URL}/parties`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: getHeaders(),
         body: JSON.stringify(partyData),
     });
     if (!response.ok) throw new Error('Failed to post party');
