@@ -43,10 +43,9 @@ export default function App() {
         }
     };
 
-    const handleLogin = async (email, password) => {
-        const username = email.split('@')[0];
+    const handleLogin = async (loginIdentifier, password) => {
         try {
-            const user = await api.login(username, password);
+            const user = await api.login(loginIdentifier, password);
             api.setAuthUser(user);
             setIsAuthenticated(true);
             setIsAdmin(user.role === 'admin');
@@ -58,7 +57,7 @@ export default function App() {
                 await refreshData();
             }
         } catch (error) {
-            alert("Invalid Credentials! Try 1stappadmin@gmail.com / Syed23072006");
+            alert("Invalid Credentials!");
         }
     };
 

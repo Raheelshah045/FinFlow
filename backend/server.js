@@ -44,8 +44,10 @@ const seedUserAccounts = async (username) => {
 // --- AUTH ROUTES ---
 app.post('/api/auth/login', async (req, res) => {
     try {
-        const { username, password } = req.body;
-        const user = await User.findOne({ username });
+        const { username: loginKey, password } = req.body;
+        const user = await User.findOne({
+            $or: [{ username: loginKey }, { email: loginKey }]
+        });
         if (!user) return res.status(401).json({ error: 'User not found' });
 
         const isMatch = await user.comparePassword(password);

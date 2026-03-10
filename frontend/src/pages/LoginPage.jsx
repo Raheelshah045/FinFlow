@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Icon } from "../components/Icon";
 
 export const LoginPage = ({ onLogin }) => {
-    const [email, setEmail] = useState("");
+    const [identifier, setIdentifier] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -13,7 +13,7 @@ export const LoginPage = ({ onLogin }) => {
         // Simulate login verification
         setTimeout(() => {
             setLoading(false);
-            onLogin(email, password);
+            onLogin(identifier, password);
         }, 1200);
     };
 
@@ -187,15 +187,15 @@ export const LoginPage = ({ onLogin }) => {
 
                 <form onSubmit={handleSubmit}>
                     <div className="input-group">
-                        <label>Email Address</label>
+                        <label>Email or Username</label>
                         <div className="input-wrapper">
                             <span className="input-icon"><Icon name="mail" size={20} /></span>
                             <input
-                                type="email"
+                                type="text"
                                 className="auth-input"
-                                placeholder="name@company.com"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="Email or Username"
+                                value={identifier}
+                                onChange={(e) => setIdentifier(e.target.value)}
                                 required
                             />
                         </div>
