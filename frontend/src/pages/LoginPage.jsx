@@ -77,8 +77,29 @@ export const LoginPage = ({ onLogin }) => {
                 .auth-button:active { transform: translateY(0); }
                 .auth-button:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
                 .auth-footer { text-align: center; margin-top: 40px; font-size: 14px; color: #64748b; fontWeight: 600; }
-                .auth-link { color: #C5A059; text-decoration: none; font-weight: 800; cursor: pointer; transition: color 0.2s; }
+                .auth-link { color: #C5A059; text-decoration: none; font-weight: 800; cursor: pointer; transition: color 0.2s; position: relative; }
                 .auth-link:hover { color: #dfbc7a; text-decoration: underline; }
+                .auth-link[data-tooltip]:hover::after {
+                    content: attr(data-tooltip);
+                    position: absolute;
+                    bottom: 100%;
+                    right: 0;
+                    margin-bottom: 8px;
+                    background: #0A1E3C;
+                    color: #fff;
+                    padding: 8px 14px;
+                    border-radius: 12px;
+                    font-size: 11px;
+                    width: 240px;
+                    line-height: 1.5;
+                    text-align: center;
+                    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+                    border: 1px solid #C5A059;
+                    z-index: 100;
+                    pointer-events: none;
+                    font-weight: 500;
+                    animation: slideIn 0.3s ease-out;
+                }
             `}</style>
 
             <div className="auth-card">
@@ -127,7 +148,14 @@ export const LoginPage = ({ onLogin }) => {
                             </button>
                         </div>
                         <div style={{ textAlign: "right", marginTop: "8px" }}>
-                            <span className="auth-link" style={{ fontSize: "13px" }}>Contact Administrator</span>
+                            <a
+                                href="mailto:syedraheelshah0318@gmail.com"
+                                className="auth-link"
+                                style={{ fontSize: "13px" }}
+                                data-tooltip="SYSTEM SUPPORT: If you encounter issues logging into the platform, please contact administration directly."
+                            >
+                                Contact Administrator
+                            </a>
                         </div>
                     </div>
 
