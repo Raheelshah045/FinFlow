@@ -7,10 +7,10 @@ export const StatCard = ({ label, value, sub, trend, accent, isCurrency = true, 
     const [inputValue, setInputValue] = React.useState(value);
 
     const accents = {
-        blue: { bg: "rgba(30,64,175,0.08)", border: "#1e40af22", icon: "#1e40af", badge: "#dbeafe", badgeText: "#1e40af" },
-        green: { bg: "rgba(5,150,105,0.07)", border: "#05966922", icon: "#059669", badge: "#d1fae5", badgeText: "#065f46" },
-        amber: { bg: "rgba(217,119,6,0.08)", border: "#d9770622", icon: "#d97706", badge: "#fef3c7", badgeText: "#92400e" },
-        red: { bg: "rgba(220,38,38,0.07)", border: "#dc262622", icon: "#dc2626", badge: "#fee2e2", badgeText: "#991b1b" },
+        blue: { bg: "rgba(37, 99, 235, 0.05)", border: "rgba(37, 99, 235, 0.1)", icon: "#2563eb" },
+        green: { bg: "rgba(16, 185, 129, 0.05)", border: "rgba(16, 185, 129, 0.1)", icon: "#10b981" },
+        amber: { bg: "rgba(245, 158, 11, 0.05)", border: "rgba(245, 158, 11, 0.1)", icon: "#f59e0b" },
+        red: { bg: "rgba(239, 68, 68, 0.05)", border: "rgba(239, 68, 68, 0.1)", icon: "#ef4444" },
     };
     const c = accents[accent] || accents.blue;
 
@@ -20,32 +20,34 @@ export const StatCard = ({ label, value, sub, trend, accent, isCurrency = true, 
     };
 
     return (
-        <div style={{ background: "#fff", border: `1.5px solid ${c.border}`, borderRadius: 14, padding: "22px 24px", position: "relative", overflow: "hidden" }}>
-            <div style={{ position: "absolute", top: 0, right: 0, width: 100, height: 100, background: c.bg, borderRadius: "0 14px 0 100%" }} />
+        <div style={{ background: "var(--bg-card)", border: `1px solid var(--border)`, borderRadius: "var(--radius-lg)", padding: "24px", position: "relative", overflow: "hidden", boxShadow: "var(--shadow)", transition: "all 0.3s ease" }}>
+            <div style={{ position: "absolute", top: 0, right: 0, width: 80, height: 80, background: c.bg, borderRadius: "0 0 0 100%" }} />
 
             {onUpdate && (
                 <button
                     onClick={() => setEditing(!editing)}
-                    style={{ position: "absolute", top: 12, right: 12, background: "none", border: "none", color: "#94a3b8", cursor: "pointer", zIndex: 5, padding: 4 }}
+                    style={{ position: "absolute", top: 16, right: 16, background: "none", border: "none", color: "var(--text-muted)", cursor: "pointer", zIndex: 5, padding: 4, transition: "color 0.2s" }}
                     title="Edit Balance"
+                    onMouseEnter={e => e.currentTarget.style.color = "var(--primary)"}
+                    onMouseLeave={e => e.currentTarget.style.color = "var(--text-muted)"}
                 >
                     <Icon name={editing ? "close" : "edit"} size={14} />
                 </button>
             )}
 
-            <div style={{ fontSize: 12, fontWeight: 600, color: "#64748b", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 10 }}>{label}</div>
+            <div style={{ fontSize: 11, fontWeight: 700, color: "var(--text-muted)", letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 12 }}>{label}</div>
 
-            <div style={{ fontSize: 26, fontWeight: 800, color: "#0f172a", lineHeight: 1.1, marginBottom: 6, fontFamily: "'DM Mono', monospace", position: "relative", zIndex: 1 }}>
+            <div style={{ fontSize: 28, fontWeight: 800, color: "var(--text-main)", lineHeight: 1.1, marginBottom: 6, position: "relative", zIndex: 1, fontFamily: "'Sora', sans-serif" }}>
                 {editing ? (
                     <div style={{ display: "flex", gap: 8 }}>
                         <input
                             type="number"
                             value={inputValue}
                             onChange={(e) => setInputValue(e.target.value)}
-                            style={{ width: "100%", border: "1px solid #e2e8f0", borderRadius: 6, padding: "4px 8px", fontSize: 16, outline: "none" }}
+                            style={{ width: "100%", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", padding: "6px 10px", fontSize: 16, outline: "none", background: "var(--bg-main)", color: "var(--text-main)" }}
                             autoFocus
                         />
-                        <button onClick={handleSave} style={{ background: "#0f172a", color: "#fff", border: "none", borderRadius: 6, padding: "0 10px", cursor: "pointer" }}>
+                        <button onClick={handleSave} style={{ background: "var(--primary)", color: "#fff", border: "none", borderRadius: 8, padding: "0 12px", cursor: "pointer", transition: "filter 0.2s" }} onMouseEnter={e => e.currentTarget.style.filter = "brightness(1.1)"} onMouseLeave={e => e.currentTarget.style.filter = "none"}>
                             <Icon name="check" size={14} />
                         </button>
                     </div>
@@ -53,10 +55,10 @@ export const StatCard = ({ label, value, sub, trend, accent, isCurrency = true, 
                     isCurrency ? fmtShort(value) : fmtNumShort(value)
                 )}
             </div>
-            {sub && <div style={{ fontSize: 12, color: "#94a3b8" }}>{sub}</div>}
-            {trend !== undefined && (
-                <div style={{ display: "inline-flex", alignItems: "center", gap: 4, marginTop: 8, background: trend >= 0 ? "#d1fae5" : "#fee2e2", color: trend >= 0 ? "#065f46" : "#991b1b", borderRadius: 20, padding: "2px 10px", fontSize: 12, fontWeight: 700 }}>
-                    <Icon name={trend >= 0 ? "trend_up" : "trend_down"} size={13} />
+            {sub && <div style={{ fontSize: 12, color: "var(--text-muted)", position: "relative", zIndex: 1 }}>{sub}</div>}
+            {trend !== undefined && !editing && (
+                <div style={{ display: "inline-flex", alignItems: "center", gap: 4, marginTop: 12, background: trend >= 0 ? "rgba(16, 185, 129, 0.1)" : "rgba(239, 68, 68, 0.1)", color: trend >= 0 ? "#059669" : "#dc2626", borderRadius: 20, padding: "2px 10px", fontSize: 11, fontWeight: 700, position: "relative", zIndex: 1 }}>
+                    <Icon name={trend >= 0 ? "trend_up" : "trend_down"} size={12} />
                     {Math.abs(trend)}%
                 </div>
             )}

@@ -25,17 +25,24 @@ export const DataTable = ({ columns, data, searchable = true }) => {
     return (
         <div>
             {searchable && (
-                <div style={{ position: "relative", marginBottom: 14 }}>
-                    <span style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "#94a3b8" }}><Icon name="search" size={15} /></span>
-                    <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search records..." style={{ width: "100%", padding: "9px 14px 9px 38px", border: "1.5px solid #e2e8f0", borderRadius: 9, fontSize: 13, outline: "none", background: "#f8fafc", boxSizing: "border-box", fontFamily: "inherit" }} />
+                <div style={{ position: "relative", marginBottom: 20 }}>
+                    <span style={{ position: "absolute", left: 16, top: "50%", transform: "translateY(-50%)", color: "var(--text-muted)", display: "flex" }}><Icon name="search" size={16} /></span>
+                    <input
+                        value={search}
+                        onChange={e => setSearch(e.target.value)}
+                        placeholder="Search records..."
+                        style={{ width: "100%", padding: "12px 14px 12px 42px", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", fontSize: 13, outline: "none", background: "var(--bg-main)", color: "var(--text-main)", boxSizing: "border-box", transition: "all 0.2s" }}
+                        onFocus={e => { e.currentTarget.style.borderColor = "var(--primary)"; e.currentTarget.style.boxShadow = "0 0 0 4px var(--primary-soft)"; }}
+                        onBlur={e => { e.currentTarget.style.borderColor = "var(--border)"; e.currentTarget.style.boxShadow = "none"; }}
+                    />
                 </div>
             )}
-            <div style={{ overflowX: "auto", borderRadius: 10, border: "1.5px solid #e2e8f0" }}>
+            <div style={{ overflowX: "auto", borderRadius: "var(--radius-md)", border: "1px solid var(--border)", background: "var(--bg-card)" }}>
                 <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
                     <thead>
-                        <tr style={{ background: "#0f172a" }}>
+                        <tr style={{ background: "var(--bg-main)", borderBottom: "1px solid var(--border)" }}>
                             {columns.map(col => (
-                                <th key={col.key} onClick={() => col.sortable !== false && toggleSort(col.key)} style={{ padding: "12px 16px", textAlign: col.align || "left", color: "#cbd5e1", fontWeight: 600, fontSize: 11, letterSpacing: "0.07em", textTransform: "uppercase", cursor: col.sortable !== false ? "pointer" : "default", whiteSpace: "nowrap", userSelect: "none" }}>
+                                <th key={col.key} onClick={() => col.sortable !== false && toggleSort(col.key)} style={{ padding: "14px 16px", textAlign: col.align || "left", color: "var(--text-muted)", fontWeight: 700, fontSize: 11, letterSpacing: "0.06em", textTransform: "uppercase", cursor: col.sortable !== false ? "pointer" : "default", whiteSpace: "nowrap", userSelect: "none" }}>
                                     {col.label}{sortCol === col.key ? (sortDir === "asc" ? " ↑" : " ↓") : ""}
                                 </th>
                             ))}
@@ -43,13 +50,13 @@ export const DataTable = ({ columns, data, searchable = true }) => {
                     </thead>
                     <tbody>
                         {filtered.length === 0 ? (
-                            <tr><td colSpan={columns.length} style={{ padding: 40, textAlign: "center", color: "#94a3b8", fontSize: 14 }}>No records found</td></tr>
+                            <tr><td colSpan={columns.length} style={{ padding: 60, textAlign: "center", color: "var(--text-muted)", fontSize: 14 }}>No match found for this criteria</td></tr>
                         ) : filtered.map((row, i) => (
-                            <tr key={i} style={{ background: i % 2 === 0 ? "#fff" : "#f8fafc", borderBottom: "1px solid #f1f5f9", transition: "background 0.15s" }}
-                                onMouseEnter={e => e.currentTarget.style.background = "#eff6ff"}
-                                onMouseLeave={e => e.currentTarget.style.background = i % 2 === 0 ? "#fff" : "#f8fafc"}>
+                            <tr key={i} style={{ borderBottom: i === filtered.length - 1 ? "none" : "1px solid var(--border)", transition: "background 0.2s" }}
+                                onMouseEnter={e => e.currentTarget.style.background = "var(--primary-soft)"}
+                                onMouseLeave={e => e.currentTarget.style.background = "transparent"}>
                                 {columns.map(col => (
-                                    <td key={col.key} style={{ padding: "11px 16px", textAlign: col.align || "left", color: "#334155", whiteSpace: "nowrap" }}>
+                                    <td key={col.key} style={{ padding: "14px 16px", textAlign: col.align || "left", color: "var(--text-main)", whiteSpace: "nowrap" }}>
                                         {col.render ? col.render(row[col.key], row) : row[col.key]}
                                     </td>
                                 ))}
@@ -58,7 +65,7 @@ export const DataTable = ({ columns, data, searchable = true }) => {
                     </tbody>
                 </table>
             </div>
-            <div style={{ fontSize: 12, color: "#94a3b8", marginTop: 8, textAlign: "right" }}>{filtered.length} record{filtered.length !== 1 ? "s" : ""}</div>
+            <div style={{ fontSize: 11, fontWeight: 600, color: "var(--text-muted)", marginTop: 12, textAlign: "right", letterSpacing: "0.02em" }}>SHOWING {filtered.length} ARCHIVED DATA POINTS</div>
         </div>
     );
 };

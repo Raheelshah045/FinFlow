@@ -1,6 +1,6 @@
 export const INITIAL_ACCOUNTS = [
     { id: "cash", name: "Cash", type: "asset", balance: 500000 },
-    { id: "bank", name: "Bank (HBL)", type: "asset", balance: 1200000 },
+    { id: "bank", name: "Bank", type: "asset", balance: 1200000 },
     { id: "sales_revenue", name: "Sales Revenue", type: "revenue", balance: 0 },
     { id: "inventory", name: "Inventory Asset", type: "asset", balance: 0 },
     { id: "expenses", name: "Operating Expenses", type: "expense", balance: 0 },
@@ -28,7 +28,7 @@ export const INITIAL_VOUCHERS = [
         id: "PV-001", type: "purchase", date: "2025-01-10", party: "Tech Distributors Ltd.",
         paymentMode: "bank", total: 340000, status: "posted",
         items: [{ productId: "p1", name: "Laptop Pro 15\"", qty: 2, unitPrice: 85000, subtotal: 170000 }, { productId: "p2", name: "4K Monitor 27\"", qty: 4, unitPrice: 42000, subtotal: 168000 }],
-        entries: [{ account: "Inventory Asset", type: "debit", amount: 340000 }, { account: "Bank (HBL)", type: "credit", amount: 340000 }]
+        entries: [{ account: "Inventory Asset", type: "debit", amount: 340000 }, { account: "Bank", type: "credit", amount: 340000 }]
     },
     {
         id: "SV-001", type: "sale", date: "2025-01-15", party: "Karachi Systems Inc.",

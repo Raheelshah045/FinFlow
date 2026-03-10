@@ -126,16 +126,36 @@ export default function App() {
     const bank = accounts.find(a => a.id === "bank")?.balance || 0;
 
     return (
-        <div style={{ display: "flex", height: "100vh", fontFamily: "'Sora', 'Segoe UI', sans-serif", background: "#f1f5f9", overflow: "hidden" }}>
+        <div style={{ display: "flex", height: "100vh", fontFamily: "'Sora', 'Segoe UI', sans-serif", background: "var(--bg-main)", overflow: "hidden" }}>
             <style>{`
-                body, html { width: 100%; height: 100%; background: #f1f5f9; }
+                :root {
+                    --primary: #2563eb;
+                    --primary-soft: rgba(37, 99, 235, 0.1);
+                    --success: #10b981;
+                    --warning: #f59e0b;
+                    --danger: #ef4444;
+                    --bg-main: #f8fafc;
+                    --bg-card: #ffffff;
+                    --bg-sidebar: #0f172a;
+                    --text-main: #0f172a;
+                    --text-muted: #64748b;
+                    --border: #e2e8f0;
+                    --radius-lg: 16px;
+                    --radius-md: 12px;
+                    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+                }
+
+                body, html { width: 100%; height: 100%; background: var(--bg-main); color: var(--text-main); }
                 * { box-sizing: border-box; margin: 0; padding: 0; }
                 #root { width: 100%; height: 100%; }
-                @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500;600&display=swap');
-                ::-webkit-scrollbar { width: 5px; height: 5px; }
-                ::-webkit-scrollbar-track { background: #f1f5f9; }
-                ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
-                @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+                @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800;900&display=swap');
+                
+                ::-webkit-scrollbar { width: 6px; height: 6px; }
+                ::-webkit-scrollbar-track { background: transparent; }
+                ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+                ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+                @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
                 select, input { font-family: inherit; }
                 
                 @media (max-width: 768px) {
@@ -171,56 +191,56 @@ export default function App() {
 
             {/* SIDEBAR */}
             {isAuthenticated && !isAdmin && (
-                <div className={`sidebar ${sidebarOpen ? 'mobile-open' : ''}`} style={{ width: sidebarOpen ? 280 : 72, background: "#0f172a", display: "flex", flexDirection: "column", flexShrink: 0, transition: "all 0.25s ease", overflow: "hidden" }}>
-                    <div style={{ padding: sidebarOpen ? "24px 20px" : "24px 0", borderBottom: "1px solid rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: sidebarOpen ? "flex-start" : "center", gap: 14, minHeight: 90 }}>
-                        <div style={{ width: sidebarOpen ? 52 : 44, height: sidebarOpen ? 52 : 44, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                            <img src="/logo.png" alt="Logo" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+                <div className={`sidebar ${sidebarOpen ? 'mobile-open' : ''}`} style={{ width: sidebarOpen ? 280 : 72, background: "var(--bg-sidebar)", display: "flex", flexDirection: "column", flexShrink: 0, transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)", overflow: "hidden", borderRight: "1px solid rgba(255,255,255,0.05)" }}>
+                    <div style={{ padding: sidebarOpen ? "28px 24px" : "28px 0", display: "flex", alignItems: "center", justifyContent: sidebarOpen ? "flex-start" : "center", gap: 14 }}>
+                        <div style={{ width: 44, height: 44, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(255,255,255,0.05)", borderRadius: 12, border: "1px solid rgba(255,255,255,0.1)" }}>
+                            <img src="/logo.png" alt="Logo" style={{ width: "24px", height: "24px", objectFit: "contain" }} />
                         </div>
                         {sidebarOpen && (
-                            <div style={{ overflow: "hidden", flex: 1 }}>
-                                <div style={{ color: "#fff", fontWeight: 900, fontSize: 22, lineHeight: 1, letterSpacing: "-0.03em" }}>Balancify</div>
-                                <div style={{ color: "#64748b", fontSize: 9, fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 6, opacity: 0.8, lineHeight: 1.4 }}>Enterprise Resource Planning</div>
+                            <div style={{ overflow: "hidden" }}>
+                                <div style={{ color: "#fff", fontWeight: 800, fontSize: 20, letterSpacing: "-0.02em" }}>Balancify</div>
+                                <div style={{ color: "#64748b", fontSize: 9, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em", marginTop: 2 }}>Enterprise ERP</div>
                             </div>
                         )}
                     </div>
 
                     {sidebarOpen && (
-                        <div style={{ padding: "12px 14px", borderBottom: "1px solid rgba(255,255,255,0.06)", margin: "0 10px 0" }}>
-                            <div style={{ background: "rgba(255,255,255,0.04)", borderRadius: 10, padding: "10px 12px" }}>
-                                <div style={{ fontSize: 10, color: "#475569", fontWeight: 700, letterSpacing: "0.08em", marginBottom: 6 }}>QUICK BALANCE</div>
-                                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 3 }}>
-                                    <span style={{ fontSize: 11, color: "#94a3b8" }}>Cash</span>
-                                    <span style={{ fontSize: 11, fontWeight: 700, color: "#34d399", fontFamily: "monospace" }}>{fmtShort(cash)}</span>
+                        <div style={{ padding: "0 16px 20px" }}>
+                            <div style={{ background: "rgba(255,255,255,0.03)", borderRadius: 14, padding: "14px", border: "1px solid rgba(255,255,255,0.05)" }}>
+                                <div style={{ fontSize: 10, color: "#475569", fontWeight: 700, letterSpacing: "0.05em", marginBottom: 10 }}>FIRM LIQUIDITY</div>
+                                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
+                                    <span style={{ fontSize: 11, color: "#94a3b8" }}>Ready Cash</span>
+                                    <span style={{ fontSize: 11, fontWeight: 700, color: "#10b981" }}>{fmtShort(cash)}</span>
                                 </div>
                                 <div style={{ display: "flex", justifyContent: "space-between" }}>
-                                    <span style={{ fontSize: 11, color: "#94a3b8" }}>Bank</span>
-                                    <span style={{ fontSize: 11, fontWeight: 700, color: "#60a5fa", fontFamily: "monospace" }}>{fmtShort(bank)}</span>
+                                    <span style={{ fontSize: 11, color: "#94a3b8" }}>Institutional</span>
+                                    <span style={{ fontSize: 11, fontWeight: 700, color: "#3b82f6" }}>{fmtShort(bank)}</span>
                                 </div>
                             </div>
                         </div>
                     )}
 
-                    <nav style={{ flex: 1, padding: "10px 10px", overflowY: "auto" }}>
+                    <nav style={{ flex: 1, padding: "0 12px", overflowY: "auto" }}>
                         {nav.map(item => (
-                            <button key={item.id} onClick={() => setPage(item.id)} style={{ width: "100%", display: "flex", alignItems: "center", gap: 12, padding: "11px 12px", borderRadius: 10, border: "none", background: page === item.id ? "rgba(59,130,246,0.2)" : "transparent", color: page === item.id ? "#60a5fa" : "#94a3b8", cursor: "pointer", fontSize: 13, fontWeight: page === item.id ? 700 : 500, textAlign: "left", marginBottom: 2, transition: "all 0.15s", fontFamily: "inherit", whiteSpace: "nowrap" }}
-                                onMouseEnter={e => { if (page !== item.id) e.currentTarget.style.background = "rgba(255,255,255,0.05)"; }}
-                                onMouseLeave={e => { if (page !== item.id) e.currentTarget.style.background = "transparent"; }}>
-                                <span style={{ flexShrink: 0 }}><Icon name={item.icon} size={17} /></span>
+                            <button key={item.id} onClick={() => setPage(item.id)} style={{ width: "100%", display: "flex", alignItems: "center", gap: 12, padding: "12px 14px", borderRadius: 12, border: "none", background: page === item.id ? "var(--primary-soft)" : "transparent", color: page === item.id ? "#60a5fa" : "#94a3b8", cursor: "pointer", fontSize: 13, fontWeight: page === item.id ? 700 : 500, textAlign: "left", marginBottom: 4, transition: "all 0.2s", fontFamily: "inherit" }}
+                                onMouseEnter={e => { if (page !== item.id) { e.currentTarget.style.background = "rgba(255,255,255,0.03)"; e.currentTarget.style.color = "#cbd5e1"; } }}
+                                onMouseLeave={e => { if (page !== item.id) { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "#94a3b8"; } }}>
+                                <span style={{ flexShrink: 0, opacity: page === item.id ? 1 : 0.7 }}><Icon name={item.icon} size={18} /></span>
                                 {sidebarOpen && item.label}
                             </button>
                         ))}
                     </nav>
 
-                    <div style={{ padding: "12px 10px", borderTop: "1px solid rgba(255,255,255,0.06)", display: "flex", flexDirection: "column", gap: 4 }}>
-                        <button onClick={() => setSidebarOpen(p => !p)} style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: sidebarOpen ? "flex-end" : "center", gap: 8, padding: "9px 12px", borderRadius: 9, border: "none", background: "rgba(255,255,255,0.04)", color: "#64748b", cursor: "pointer", fontSize: 12, fontFamily: "inherit" }}>
+                    <div style={{ padding: "20px 12px", borderTop: "1px solid rgba(255,255,255,0.05)", display: "flex", flexDirection: "column", gap: 8 }}>
+                        <button onClick={() => setSidebarOpen(p => !p)} style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: sidebarOpen ? "flex-start" : "center", gap: 12, padding: "10px 14px", borderRadius: 10, border: "none", background: "transparent", color: "#64748b", cursor: "pointer", fontSize: 12, fontFamily: "inherit" }}>
                             <Icon name="menu" size={16} />
-                            {sidebarOpen && <span style={{ fontSize: 11 }}>Collapse</span>}
+                            {sidebarOpen && <span>Minimize Menu</span>}
                         </button>
-                        <button onClick={handleLogout} style={{ width: "100%", display: "flex", alignItems: "center", gap: 12, padding: "11px 12px", borderRadius: 10, border: "none", background: "transparent", color: "#f87171", cursor: "pointer", fontSize: 13, fontWeight: 600, textAlign: "left", transition: "all 0.15s", fontFamily: "inherit" }}
-                            onMouseEnter={e => e.currentTarget.style.background = "rgba(239, 68, 68, 0.1)"}
+                        <button onClick={handleLogout} style={{ width: "100%", display: "flex", alignItems: "center", gap: 12, padding: "12px 14px", borderRadius: 12, border: "none", background: "transparent", color: "#f87171", cursor: "pointer", fontSize: 13, fontWeight: 600, textAlign: "left", transition: "all 0.2s", fontFamily: "inherit" }}
+                            onMouseEnter={e => e.currentTarget.style.background = "rgba(239, 68, 68, 0.08)"}
                             onMouseLeave={e => e.currentTarget.style.background = "transparent"}>
-                            <span style={{ transform: "rotate(180deg)", display: "flex" }}><Icon name="arrow_right" size={17} /></span>
-                            {sidebarOpen && <span>Sign Out</span>}
+                            <span style={{ transform: "rotate(180deg)", display: "flex" }}><Icon name="arrow_right" size={18} /></span>
+                            {sidebarOpen && <span>Secure Logout</span>}
                         </button>
                     </div>
                 </div>

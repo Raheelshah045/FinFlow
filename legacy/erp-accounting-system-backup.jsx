@@ -3,7 +3,7 @@ import { useState, useMemo, useCallback, useEffect } from "react";
 // ─── MOCK DATA & INITIAL STATE ───────────────────────────────────────────────
 const INITIAL_ACCOUNTS = [
   { id: "cash", name: "Cash", type: "asset", balance: 500000 },
-  { id: "bank", name: "Bank (HBL)", type: "asset", balance: 1200000 },
+  { id: "bank", name: "Bank", type: "asset", balance: 1200000 },
   { id: "sales_revenue", name: "Sales Revenue", type: "revenue", balance: 0 },
   { id: "inventory", name: "Inventory Asset", type: "asset", balance: 0 },
   { id: "expenses", name: "Operating Expenses", type: "expense", balance: 0 },
@@ -31,13 +31,13 @@ const INITIAL_VOUCHERS = [
     id: "PV-001", type: "purchase", date: "2025-01-10", party: "Tech Distributors Ltd.",
     paymentMode: "bank", total: 340000, status: "posted",
     items: [{ productId: "p1", name: "Laptop Pro 15\"", qty: 2, unitPrice: 85000, subtotal: 170000 }, { productId: "p2", name: "4K Monitor 27\"", qty: 4, unitPrice: 42000, subtotal: 168000 }],
-    entries: [{ account: "Inventory Asset", type: "debit", amount: 340000 }, { account: "Bank (HBL)", type: "credit", amount: 340000 }]
+    entries: [{ account: "Inventory Asset", type: "debit", amount: 340000 }, { account: "Bank", type: "credit", amount: 340000 }]
   },
   {
     id: "SV-001", type: "sale", date: "2025-01-15", party: "Karachi Systems Inc.",
     paymentMode: "bank", total: 294000, status: "posted",
     items: [{ productId: "p1", name: "Laptop Pro 15\"", qty: 2, unitPrice: 110000, subtotal: 220000 }, { productId: "p2", name: "4K Monitor 27\"", qty: 2, unitPrice: 58000, subtotal: 116000 }],
-    entries: [{ account: "Bank (HBL)", type: "debit", amount: 294000 }, { account: "Sales Revenue", type: "credit", amount: 294000 }],
+    entries: [{ account: "Bank", type: "debit", amount: 294000 }, { account: "Sales Revenue", type: "credit", amount: 294000 }],
     margin: 51000
   },
   {
@@ -57,7 +57,7 @@ const INITIAL_VOUCHERS = [
     id: "SV-003", type: "sale", date: "2025-03-01", party: "Islamabad IT Hub",
     paymentMode: "bank", total: 90000, status: "posted",
     items: [{ productId: "p4", name: "Wireless Mouse", qty: 5, unitPrice: 5500, subtotal: 27500 }, { productId: "p6", name: "HD Webcam", qty: 4, unitPrice: 15000, subtotal: 60000 }],
-    entries: [{ account: "Bank (HBL)", type: "debit", amount: 90000 }, { account: "Sales Revenue", type: "credit", amount: 90000 }],
+    entries: [{ account: "Bank", type: "debit", amount: 90000 }, { account: "Sales Revenue", type: "credit", amount: 90000 }],
     margin: 25100
   },
 ];
@@ -295,7 +295,7 @@ const TransactionForm = ({ type, products, parties, accounts, onSubmit, onClose 
           <label style={labelStyle}>Payment Mode</label>
           <select value={paymentMode} onChange={e => setPaymentMode(e.target.value)} style={inputStyle()}>
             <option value="cash">Cash</option>
-            <option value="bank">Bank (HBL)</option>
+            <option value="bank">Bank</option>
           </select>
         </div>
       </div>
@@ -402,7 +402,7 @@ const DashboardPage = ({ vouchers, products, accounts }) => {
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16, marginBottom: 24 }}>
         <StatCard label="Total Cash" value={cash} sub="Available in hand" accent="green" trend={12} />
-        <StatCard label="Bank Balance" value={bank} sub="HBL Main Account" accent="blue" trend={-3} />
+        <StatCard label="Bank Balance" value={bank} sub="Main Account" accent="blue" trend={-3} />
         <StatCard label="Net Profit" value={totalMargin} sub="Margin on sales" accent="amber" trend={18} />
         <StatCard label="Stock Value" value={products.reduce((s, p) => s + p.stock * p.purchasePrice, 0)} sub={`${products.length} product lines`} accent="red" />
       </div>
@@ -766,14 +766,15 @@ export default function App() {
     });
 
     const entries = type === "purchase"
-      ? [{ account: "Inventory Asset", type: "debit", amount: total }, { account: paymentMode === "cash" ? "Cash" : "Bank (HBL)", type: "credit", amount: total }]
-      : [{ account: paymentMode === "cash" ? "Cash" : "Bank (HBL)", type: "debit", amount: total }, { account: "Sales Revenue", type: "credit", amount: total }];
+      ? [{ account: "Inventory Asset", type: "debit", amount: total }, { account: paymentMode === "cash" ? "Cash" : "Bank", type: "credit", amount: total }]
+      : [{ account: paymentMode === "cash" ? "Cash" : "Bank", type: "debit", amount: total }, { account: "Sales Revenue", type: "credit", amount: total }];
 
     const newVoucher = { id, type, date, party, paymentMode, total, status: "posted", items: vItems, entries, ...(type === "sale" ? { margin } : {}) };
 
     setVouchers(prev => [...prev, newVoucher]);
     setProducts(updatedProducts);
     setAccounts(updatedAccounts);
+    
   }, [products, accounts]);
 
   const nav = [

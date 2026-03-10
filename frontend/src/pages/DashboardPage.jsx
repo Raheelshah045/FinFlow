@@ -65,18 +65,18 @@ export const DashboardPage = ({ vouchers, products, accounts, onUpdateAccount })
     const monthLabel = new Date(selectedMonth + "-01").toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 
     return (
-        <div style={{ animation: "fadeUp 0.3s ease-out" }}>
-            <div style={{ marginBottom: 24, display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 16 }}>
+        <div style={{ animation: "fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1)" }}>
+            <div style={{ marginBottom: 32, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16 }}>
                 <div>
-                    <h1 style={{ fontSize: 24, fontWeight: 800, color: "#0f172a", margin: "0 0 4px" }}>Final Snapshot</h1>
-                    <p style={{ color: "#64748b", margin: 0, fontSize: 14 }}>Real-time metrics for {monthLabel}</p>
+                    <h1 style={{ fontSize: 28, fontWeight: 800, color: "var(--text-main)", margin: "0 0 6px", letterSpacing: "-0.02em" }}>Executive Summary</h1>
+                    <p style={{ color: "var(--text-muted)", margin: 0, fontSize: 14, fontWeight: 500 }}>Global financial insights for {monthLabel}</p>
                 </div>
-                <div style={{ background: "#fff", border: "1.5px solid #e2e8f0", borderRadius: 12, padding: "4px 12px", display: "flex", alignItems: "center", gap: 8 }}>
-                    <span style={{ fontSize: 12, fontWeight: 700, color: "#94a3b8" }}>SELECT PERIOD</span>
+                <div style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", padding: "4px 14px", display: "flex", alignItems: "center", gap: 10, boxShadow: "var(--shadow)" }}>
+                    <span style={{ fontSize: 10, fontWeight: 800, color: "var(--text-muted)", letterSpacing: "0.08em" }}>REPORTING PERIOD</span>
                     <select
                         value={selectedMonth}
                         onChange={e => setSelectedMonth(e.target.value)}
-                        style={{ border: "none", background: "none", padding: "8px 0", fontSize: 13, fontWeight: 700, color: "#0f172a", outline: "none", cursor: "pointer" }}
+                        style={{ border: "none", background: "none", padding: "10px 0", fontSize: 13, fontWeight: 700, color: "var(--primary)", outline: "none", cursor: "pointer" }}
                     >
                         {availableMonths.map(m => (
                             <option key={m} value={m}>
@@ -88,71 +88,75 @@ export const DashboardPage = ({ vouchers, products, accounts, onUpdateAccount })
                 </div>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16, marginBottom: 24 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 20, marginBottom: 32 }}>
                 <StatCard
-                    label="Total Cash"
+                    label="Available Cash"
                     value={cash}
-                    sub="Cash in Hand"
+                    sub="Liquid hand balance"
                     accent="green"
                     onUpdate={(val) => onUpdateAccount(cashAcc.id, val)}
                 />
                 <StatCard
-                    label="Bank Balance"
+                    label="Institutional Funds"
                     value={bank}
-                    sub="Company Assets"
+                    sub="Verified bank balance"
                     accent="blue"
                     onUpdate={(val) => onUpdateAccount(bankAcc.id, val)}
                 />
-                <StatCard label="Net Profit" value={totalMargin} sub={`Profit in ${monthLabel.split(' ')[0]}`} accent="amber" />
-                <StatCard label="Stock Value" value={products.reduce((s, p) => s + (p.stock || 0) * (p.purchasePrice || 0), 0)} sub={`${products.length} product lines`} accent="red" />
+                <StatCard label="Operating Profit" value={totalMargin} sub={`Performance: ${monthLabel.split(' ')[0]}`} accent="amber" />
+                <StatCard label="Inventory Value" value={products.reduce((s, p) => s + (p.stock || 0) * (p.purchasePrice || 0), 0)} sub={`${products.length} active SKUs`} accent="red" />
             </div>
 
-            <div className="dashboard-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 20, marginBottom: 20 }}>
-                <div style={{ background: "#fff", border: "1.5px solid #e2e8f0", borderRadius: 14, padding: 24 }}>
-                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
-                        <h3 style={{ margin: 0, fontSize: 15, fontWeight: 700, color: "#0f172a" }}>Sales Trends</h3>
-                        <div style={{ display: "flex", gap: 14, fontSize: 12, fontWeight: 600 }}>
-                            <span style={{ display: "flex", alignItems: "center", gap: 5 }}><span style={{ width: 10, height: 10, background: "#3b82f6", borderRadius: 2, display: "inline-block" }} /> Sales</span>
-                            <span style={{ display: "flex", alignItems: "center", gap: 5 }}><span style={{ width: 10, height: 10, background: "#f87171", borderRadius: 2, display: "inline-block" }} /> Purchases</span>
+            <div className="dashboard-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 24, marginBottom: 24 }}>
+                <div style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: "var(--radius-lg)", padding: "28px", boxShadow: "var(--shadow)" }}>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 24 }}>
+                        <div>
+                            <h3 style={{ margin: 0, fontSize: 16, fontWeight: 700, color: "var(--text-main)" }}>Performance Analytics</h3>
+                            <p style={{ margin: "4px 0 0", fontSize: 13, color: "var(--text-muted)" }}>Sales vs Procurement trends</p>
+                        </div>
+                        <div style={{ display: "flex", gap: 16, fontSize: 11, fontWeight: 700 }}>
+                            <span style={{ display: "flex", alignItems: "center", gap: 6, color: "var(--text-main)" }}><span style={{ width: 8, height: 8, background: "#3b82f6", borderRadius: "50%" }} /> SALES</span>
+                            <span style={{ display: "flex", alignItems: "center", gap: 6, color: "var(--text-main)" }}><span style={{ width: 8, height: 8, background: "#f87171", borderRadius: "50%" }} /> PURCHASES</span>
                         </div>
                     </div>
-                    <MiniBarChart data={chartData} height={180} />
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginTop: 20 }}>
-                        <div style={{ background: "#eff6ff", borderRadius: 10, padding: "12px 16px" }}>
-                            <div style={{ fontSize: 10, color: "#3b82f6", fontWeight: 700, marginBottom: 4 }}>MONTHLY SALES</div>
-                            <div style={{ fontSize: 18, fontWeight: 800, color: "#1e40af", fontFamily: "'DM Mono', monospace" }}>{fmtShort(totalSales)}</div>
+                    <MiniBarChart data={chartData} height={200} />
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginTop: 28 }}>
+                        <div style={{ background: "var(--bg-main)", borderRadius: "var(--radius-md)", padding: "16px", border: "1px solid var(--border)" }}>
+                            <div style={{ fontSize: 10, color: "var(--primary)", fontWeight: 800, marginBottom: 6, letterSpacing: "0.05em" }}>PERIOD REVENUE</div>
+                            <div style={{ fontSize: 22, fontWeight: 800, color: "var(--text-main)" }}>{fmtShort(totalSales)}</div>
                         </div>
-                        <div style={{ background: "#fff1f2", borderRadius: 10, padding: "12px 16px" }}>
-                            <div style={{ fontSize: 10, color: "#f87171", fontWeight: 700, marginBottom: 4 }}>MONTHLY PURCHASES</div>
-                            <div style={{ fontSize: 18, fontWeight: 800, color: "#dc2626", fontFamily: "'DM Mono', monospace" }}>{fmtShort(totalPurchases)}</div>
+                        <div style={{ background: "var(--bg-main)", borderRadius: "var(--radius-md)", padding: "16px", border: "1px solid var(--border)" }}>
+                            <div style={{ fontSize: 10, color: "var(--danger)", fontWeight: 800, marginBottom: 6, letterSpacing: "0.05em" }}>PERIOD EXPENSE</div>
+                            <div style={{ fontSize: 22, fontWeight: 800, color: "var(--text-main)" }}>{fmtShort(totalPurchases)}</div>
                         </div>
                     </div>
                 </div>
 
-                <div style={{ background: "#fff", border: "1.5px solid #e2e8f0", borderRadius: 14, padding: 24 }}>
-                    <h3 style={{ margin: "0 0 16px", fontSize: 15, fontWeight: 700, color: "#0f172a" }}>⚠️ Stock Alerts</h3>
-                    <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                        {lowStock.length === 0 ? <div style={{ color: "#94a3b8", fontSize: 13 }}>All stock levels healthy</div> : lowStock.slice(0, 5).map(p => (
-                            <div key={p.id} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingBottom: 10, borderBottom: "1px solid #f1f5f9" }}>
+                <div style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: "var(--radius-lg)", padding: "28px", boxShadow: "var(--shadow)" }}>
+                    <h3 style={{ margin: "0 0 4px", fontSize: 16, fontWeight: 700, color: "var(--text-main)" }}>Operational Constraints</h3>
+                    <p style={{ margin: "0 0 24px", fontSize: 13, color: "var(--text-muted)" }}>Low inventory levels requiring action</p>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                        {lowStock.length === 0 ? <div style={{ color: "var(--text-muted)", fontSize: 13, textAlign: "center", padding: "40px 0" }}>No critical stock alerts</div> : lowStock.slice(0, 5).map(p => (
+                            <div key={p.id} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingBottom: 14, borderBottom: "1px solid var(--bg-main)" }}>
                                 <div style={{ overflow: "hidden" }}>
-                                    <div style={{ fontSize: 13, fontWeight: 600, color: "#0f172a", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{p.name}</div>
-                                    <div style={{ fontSize: 11, color: "#94a3b8" }}>SKU: {p.sku}</div>
+                                    <div style={{ fontSize: 14, fontWeight: 600, color: "var(--text-main)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{p.name}</div>
+                                    <div style={{ fontSize: 11, color: "var(--text-muted)", marginTop: 2 }}>ID: {p.sku}</div>
                                 </div>
-                                <Badge color={p.stock === 0 ? "red" : "amber"}>{p.stock === 0 ? "Out of Stock" : `${p.stock} units left`}</Badge>
+                                <Badge color={p.stock === 0 ? "red" : "amber"}>{p.stock === 0 ? "OUT OF STOCK" : `${p.stock} UNITS`}</Badge>
                             </div>
                         ))}
                     </div>
                 </div>
             </div>
 
-            <div style={{ background: "#fff", border: "1.5px solid #e2e8f0", borderRadius: 14, padding: 24 }}>
-                <h3 style={{ margin: "0 0 16px", fontSize: 15, fontWeight: 700, color: "#0f172a" }}>Transactions for {monthLabel.split(' ')[0]}</h3>
+            <div style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: "var(--radius-lg)", padding: "28px", boxShadow: "var(--shadow)" }}>
+                <h3 style={{ margin: "0 0 20px", fontSize: 16, fontWeight: 700, color: "var(--text-main)" }}>Recent Ledger Entries ({monthLabel.split(' ')[0]})</h3>
                 <DataTable searchable={false} columns={[
-                    { key: "id", label: "Voucher #" },
-                    { key: "date", label: "Date" },
-                    { key: "type", label: "Type", render: v => <Badge color={v === "sale" ? "green" : "blue"}>{v === "sale" ? "Sale" : "Purchase"}</Badge> },
-                    { key: "party", label: "Party" },
-                    { key: "total", label: "Amount", align: "right", render: v => <span style={{ fontFamily: "monospace", fontWeight: 700, color: "#0f172a" }}>{fmt(v)}</span> },
+                    { key: "id", label: "REF NO", render: v => <span style={{ fontWeight: 700, color: "var(--primary)", fontSize: 12 }}>{v}</span> },
+                    { key: "date", label: "DATE" },
+                    { key: "type", label: "TYPE", render: v => <Badge color={v === "sale" ? "green" : "blue"}>{v.toUpperCase()}</Badge> },
+                    { key: "party", label: "COUNTERPARTY" },
+                    { key: "total", label: "SETTLEMENT", align: "right", render: v => <span style={{ fontWeight: 800, color: "var(--text-main)" }}>{fmt(v)}</span> },
                 ]} data={recentVouchers} />
             </div>
         </div>
