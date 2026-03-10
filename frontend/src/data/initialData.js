@@ -34,7 +34,7 @@ export const INITIAL_VOUCHERS = [
         id: "SV-001", type: "sale", date: "2025-01-15", party: "Karachi Systems Inc.",
         paymentMode: "bank", total: 294000, status: "posted",
         items: [{ productId: "p1", name: "Laptop Pro 15\"", qty: 2, unitPrice: 110000, subtotal: 220000 }, { productId: "p2", name: "4K Monitor 27\"", qty: 2, unitPrice: 58000, subtotal: 116000 }],
-        entries: [{ account: "Bank (HBL)", type: "debit", amount: 294000 }, { account: "Sales Revenue", type: "credit", amount: 294000 }],
+        entries: [{ account: "Bank", type: "debit", amount: 294000 }, { account: "Sales Revenue", type: "credit", amount: 294000 }],
         margin: 51000
     },
     {
@@ -54,7 +54,7 @@ export const INITIAL_VOUCHERS = [
         id: "SV-003", type: "sale", date: "2025-03-01", party: "Islamabad IT Hub",
         paymentMode: "bank", total: 90000, status: "posted",
         items: [{ productId: "p4", name: "Wireless Mouse", qty: 5, unitPrice: 5500, subtotal: 27500 }, { productId: "p6", name: "HD Webcam", qty: 4, unitPrice: 15000, subtotal: 60000 }],
-        entries: [{ account: "Bank (HBL)", type: "debit", amount: 90000 }, { account: "Sales Revenue", type: "credit", amount: 90000 }],
+        entries: [{ account: "Bank", type: "debit", amount: 90000 }, { account: "Sales Revenue", type: "credit", amount: 90000 }],
         margin: 25100
     },
 ];

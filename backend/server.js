@@ -101,6 +101,21 @@ app.get('/api/accounts', authenticate, async (req, res) => {
     }
 });
 
+app.put('/api/accounts/:id', authenticate, async (req, res) => {
+    try {
+        const { balance } = req.body;
+        const acc = await Account.findOneAndUpdate(
+            { userId: req.userId, id: req.params.id },
+            { balance: Number(balance) },
+            { new: true }
+        );
+        if (!acc) return res.status(404).json({ error: 'Account not found' });
+        res.json(acc);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 app.get('/api/products', authenticate, async (req, res) => {
     try {
         res.json(await Product.find({ userId: req.userId }));

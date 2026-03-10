@@ -102,6 +102,15 @@ export default function App() {
         }
     };
 
+    const updateAccountBalance = async (id, balance) => {
+        try {
+            const updated = await api.updateAccount(id, balance);
+            setAccounts(prev => prev.map(a => a.id === id ? updated : a));
+        } catch (error) {
+            console.error("Error updating account:", error);
+        }
+    };
+
     const nav = [
         { id: "dashboard", label: "Dashboard", icon: "dashboard" },
         { id: "purchase", label: "Purchase Vouchers", icon: "purchase" },
@@ -240,7 +249,7 @@ export default function App() {
                     ) : (
                         loading ? <div style={{ display: "flex", justifyContent: "center", paddingTop: 100 }}>Loading Data...</div> : (
                             <>
-                                {page === "dashboard" && <DashboardPage vouchers={vouchers} products={products} accounts={accounts} />}
+                                {page === "dashboard" && <DashboardPage vouchers={vouchers} products={products} accounts={accounts} onUpdateAccount={updateAccountBalance} />}
                                 {page === "purchase" && <VoucherPage type="purchase" vouchers={vouchers} products={products} parties={parties} accounts={accounts} onAdd={createDoubleEntry} onAddVendor={addParty} onAddProduct={addProduct} />}
                                 {page === "sale" && <VoucherPage type="sale" vouchers={vouchers} products={products} parties={parties} accounts={accounts} onAdd={createDoubleEntry} onAddVendor={addParty} onAddProduct={addProduct} />}
                                 {page === "journal" && <JournalPage vouchers={vouchers} accounts={accounts} onAdd={createDoubleEntry} />}

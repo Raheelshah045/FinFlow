@@ -108,7 +108,7 @@ export const TransactionForm = ({ type, products, parties, accounts, onSubmit, o
                     <label style={labelStyle}>Payment Mode</label>
                     <select value={paymentMode} onChange={e => setPaymentMode(e.target.value)} style={inputStyle()}>
                         <option value="cash">Cash</option>
-                        <option value="bank">Bank (HBL)</option>
+                        <option value="bank">Bank</option>
                     </select>
                 </div>
             </div>

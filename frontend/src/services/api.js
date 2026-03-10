@@ -53,6 +53,16 @@ export const fetchAccounts = async () => {
     return response.json();
 };
 
+export const updateAccount = async (id, balance) => {
+    const response = await fetch(`${API_BASE_URL}/accounts/${id}`, {
+        method: 'PUT',
+        headers: getHeaders(),
+        body: JSON.stringify({ balance }),
+    });
+    if (!response.ok) throw new Error('Failed to update account');
+    return response.json();
+};
+
 export const fetchProducts = async () => {
     const response = await fetch(`${API_BASE_URL}/products`, { headers: getHeaders() });
     if (!response.ok) throw new Error('Failed to fetch products');
