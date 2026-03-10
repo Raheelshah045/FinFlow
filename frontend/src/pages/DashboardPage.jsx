@@ -1,4 +1,3 @@
-import React from "react";
 import React, { useState, useMemo } from "react";
 import { StatCard } from "../components/StatCard";
 import { MiniBarChart } from "../components/MiniBarChart";
