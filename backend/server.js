@@ -45,14 +45,22 @@ const seedUserAccounts = async (username) => {
 app.post('/api/auth/login', async (req, res) => {
     try {
         const { username: loginKey, password } = req.body;
+        console.log(`[LOGIN TRY] Attempt by: ${loginKey}`);
         const user = await User.findOne({
             $or: [{ username: loginKey }, { email: loginKey }]
         });
-        if (!user) return res.status(401).json({ error: 'User not found' });
+        if (!user) {
+            console.warn(`[LOGIN FAIL] User not found: ${loginKey}`);
+            return res.status(401).json({ error: 'User not found' });
+        }
 
         const isMatch = await user.comparePassword(password);
-        if (!isMatch) return res.status(401).json({ error: 'Invalid password' });
+        if (!isMatch) {
+            console.warn(`[LOGIN FAIL] Invalid password for: ${loginKey}`);
+            return res.status(401).json({ error: 'Invalid password' });
+        }
 
+        console.log(`[LOGIN SUCCESS] Authorized: ${user.username}`);
         // On login, ensure they have initial accounts
         await seedUserAccounts(user.username);
 
