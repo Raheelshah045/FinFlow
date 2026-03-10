@@ -7,9 +7,11 @@ export const StatCard = ({ label, value, sub, trend, accent, isCurrency = true, 
     const [inputValue, setInputValue] = React.useState(value);
 
     const accents = {
+        navy: { bg: "rgba(10, 30, 60, 0.05)", border: "rgba(10, 30, 60, 0.1)", icon: "#0A1E3C" },
+        gold: { bg: "rgba(197, 160, 89, 0.08)", border: "rgba(197, 160, 89, 0.15)", icon: "#C5A059" },
         blue: { bg: "rgba(37, 99, 235, 0.05)", border: "rgba(37, 99, 235, 0.1)", icon: "#2563eb" },
         green: { bg: "rgba(16, 185, 129, 0.05)", border: "rgba(16, 185, 129, 0.1)", icon: "#10b981" },
-        amber: { bg: "rgba(245, 158, 11, 0.05)", border: "rgba(245, 158, 11, 0.1)", icon: "#f59e0b" },
+        amber: { bg: "rgba(197, 160, 89, 0.05)", border: "rgba(197, 160, 89, 0.1)", icon: "#C5A059" },
         red: { bg: "rgba(239, 68, 68, 0.05)", border: "rgba(239, 68, 68, 0.1)", icon: "#ef4444" },
     };
     const c = accents[accent] || accents.blue;

@@ -24,46 +24,48 @@ export const PartiesPage = ({ parties, onAdd }) => {
         <div style={{ animation: "fadeUp 0.3s ease-out" }}>
             <div className="voucher-top-bar" style={{ marginBottom: 24, display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
                 <div>
-                    <h1 style={{ fontSize: 24, fontWeight: 800, color: "#0f172a", margin: "0 0 4px" }}>Vendor Management</h1>
-                    <p style={{ color: "#64748b", margin: 0, fontSize: 14 }}>Manage your suppliers and service providers</p>
+                    <h1 style={{ fontSize: 24, fontWeight: 800, color: "var(--text-main)", margin: "0 0 4px", letterSpacing: "-0.02em" }}>Vendor Registry</h1>
+                    <p style={{ color: "var(--text-muted)", margin: 0, fontSize: 14, fontWeight: 500 }}>Manage your suppliers and service providers</p>
                 </div>
                 <button
                     onClick={() => setIsModalOpen(true)}
-                    style={{ background: "#3b82f6", color: "#fff", border: "none", padding: "10px 20px", borderRadius: 8, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 8 }}
+                    style={{ background: "var(--primary)", color: "#fff", border: "none", padding: "12px 24px", borderRadius: "var(--radius-md)", fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 8, transition: "all 0.2s", boxShadow: "0 4px 12px rgba(10, 30, 60, 0.15)" }}
+                    onMouseEnter={e => e.currentTarget.style.filter = "brightness(1.1)"}
+                    onMouseLeave={e => e.currentTarget.style.filter = "none"}
                 >
-                    + Add New Vendor
+                    + Register New Vendor
                 </button>
             </div>
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16, marginBottom: 24 }}>
-                <StatCard label="Total Vendors" value={vendors.length} sub="Active Suppliers" accent="indigo" isCurrency={false} />
+                <StatCard label="Total Vendors" value={vendors.length} sub="Active Suppliers" accent="navy" isCurrency={false} />
             </div>
 
-            <div style={{ background: "#fff", border: "1.5px solid #e2e8f0", borderRadius: 14, padding: 24 }}>
+            <div style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: "var(--radius-lg)", padding: "28px", boxShadow: "var(--shadow)" }}>
                 <DataTable columns={[
                     { key: "id", label: "ID" },
                     { key: "name", label: "Vendor Name" },
                 ]} data={vendors} />
             </div>
 
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Add New Vendor">
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Register New Vendor">
                 <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                     <div>
-                        <label style={{ display: "block", fontSize: 13, fontWeight: 600, color: "#475569", marginBottom: 6 }}>Vendor Name</label>
+                        <label style={{ display: "block", fontSize: 11, fontWeight: 700, color: "var(--text-muted)", marginBottom: 8, textTransform: "uppercase", letterSpacing: "0.05em" }}>Vendor Name</label>
                         <input
                             required
                             type="text"
                             value={form.name}
                             onChange={e => setForm({ ...form, name: e.target.value })}
                             placeholder="Enter name (e.g. ABC Tech)"
-                            style={{ width: "100%", padding: "10px 12px", borderRadius: 8, border: "1.5px solid #e2e8f0", outline: "none" }}
+                            style={{ width: "100%", padding: "12px 14px", borderRadius: "var(--radius-md)", border: "1px solid var(--border)", background: "var(--bg-main)", outline: "none", fontSize: 13 }}
                         />
                     </div>
                     <button
                         type="submit"
-                        style={{ background: "#3b82f6", color: "#fff", border: "none", padding: "12px", borderRadius: 8, fontWeight: 600, cursor: "pointer", marginTop: 8 }}
+                        style={{ background: "var(--primary)", color: "#fff", border: "none", padding: "16px", borderRadius: "var(--radius-md)", fontWeight: 700, cursor: "pointer", marginTop: 8, fontSize: 14, boxShadow: "0 10px 15px -3px rgba(10, 30, 60, 0.2)" }}
                     >
-                        Save Vendor
+                        Save Vendor Details
                     </button>
                 </form>
             </Modal>

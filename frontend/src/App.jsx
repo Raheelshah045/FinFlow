@@ -129,19 +129,21 @@ export default function App() {
         <div style={{ display: "flex", height: "100vh", fontFamily: "'Sora', 'Segoe UI', sans-serif", background: "var(--bg-main)", overflow: "hidden" }}>
             <style>{`
                 :root {
-                    --primary: #2563eb;
-                    --primary-soft: rgba(37, 99, 235, 0.1);
+                    --primary: #0A1E3C;
+                    --primary-soft: rgba(10, 30, 60, 0.08);
+                    --accent: #C5A059;
+                    --accent-soft: rgba(197, 160, 89, 0.15);
                     --success: #10b981;
-                    --warning: #f59e0b;
+                    --warning: #C5A059;
                     --danger: #ef4444;
-                    --bg-main: #f8fafc;
+                    --bg-main: #f4f7f9;
                     --bg-card: #ffffff;
-                    --bg-sidebar: #0f172a;
-                    --text-main: #0f172a;
+                    --bg-sidebar: #0A1E3C;
+                    --text-main: #0A1E3C;
                     --text-muted: #64748b;
                     --border: #e2e8f0;
-                    --radius-lg: 16px;
-                    --radius-md: 12px;
+                    --radius-lg: 24px;
+                    --radius-md: 16px;
                     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
                 }
 
@@ -193,13 +195,13 @@ export default function App() {
             {isAuthenticated && !isAdmin && (
                 <div className={`sidebar ${sidebarOpen ? 'mobile-open' : ''}`} style={{ width: sidebarOpen ? 280 : 72, background: "var(--bg-sidebar)", display: "flex", flexDirection: "column", flexShrink: 0, transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)", overflow: "hidden", borderRight: "1px solid rgba(255,255,255,0.05)" }}>
                     <div style={{ padding: sidebarOpen ? "28px 24px" : "28px 0", display: "flex", alignItems: "center", justifyContent: sidebarOpen ? "flex-start" : "center", gap: 14 }}>
-                        <div style={{ width: 44, height: 44, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(255,255,255,0.05)", borderRadius: 12, border: "1px solid rgba(255,255,255,0.1)" }}>
-                            <img src="/logo.png" alt="Logo" style={{ width: "24px", height: "24px", objectFit: "contain" }} />
+                        <div style={{ width: 44, height: 44, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", background: "#ffffff", borderRadius: 12, boxShadow: "0 4px 10px rgba(0,0,0,0.1)" }}>
+                            <img src="/logo.png" alt="Logo" style={{ width: "28px", height: "28px", objectFit: "contain" }} />
                         </div>
                         {sidebarOpen && (
                             <div style={{ overflow: "hidden" }}>
                                 <div style={{ color: "#fff", fontWeight: 800, fontSize: 20, letterSpacing: "-0.02em" }}>Balancify</div>
-                                <div style={{ color: "#64748b", fontSize: 9, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em", marginTop: 2 }}>Enterprise ERP</div>
+                                <div style={{ color: "#94a3b8", fontSize: 9, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em", marginTop: 2 }}>Enterprise ERP</div>
                             </div>
                         )}
                     </div>
@@ -214,7 +216,7 @@ export default function App() {
                                 </div>
                                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                                     <span style={{ fontSize: 11, color: "#94a3b8" }}>Institutional</span>
-                                    <span style={{ fontSize: 11, fontWeight: 700, color: "#3b82f6" }}>{fmtShort(bank)}</span>
+                                    <span style={{ fontSize: 11, fontWeight: 700, color: "var(--accent)" }}>{fmtShort(bank)}</span>
                                 </div>
                             </div>
                         </div>
@@ -222,7 +224,7 @@ export default function App() {
 
                     <nav style={{ flex: 1, padding: "0 12px", overflowY: "auto" }}>
                         {nav.map(item => (
-                            <button key={item.id} onClick={() => setPage(item.id)} style={{ width: "100%", display: "flex", alignItems: "center", gap: 12, padding: "12px 14px", borderRadius: 12, border: "none", background: page === item.id ? "var(--primary-soft)" : "transparent", color: page === item.id ? "#60a5fa" : "#94a3b8", cursor: "pointer", fontSize: 13, fontWeight: page === item.id ? 700 : 500, textAlign: "left", marginBottom: 4, transition: "all 0.2s", fontFamily: "inherit" }}
+                            <button key={item.id} onClick={() => setPage(item.id)} style={{ width: "100%", display: "flex", alignItems: "center", gap: 12, padding: "12px 14px", borderRadius: 12, border: "none", background: page === item.id ? "rgba(197, 160, 89, 0.1)" : "transparent", color: page === item.id ? "var(--accent)" : "#94a3b8", cursor: "pointer", fontSize: 13, fontWeight: page === item.id ? 700 : 500, textAlign: "left", marginBottom: 4, transition: "all 0.2s", fontFamily: "inherit" }}
                                 onMouseEnter={e => { if (page !== item.id) { e.currentTarget.style.background = "rgba(255,255,255,0.03)"; e.currentTarget.style.color = "#cbd5e1"; } }}
                                 onMouseLeave={e => { if (page !== item.id) { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "#94a3b8"; } }}>
                                 <span style={{ flexShrink: 0, opacity: page === item.id ? 1 : 0.7 }}><Icon name={item.icon} size={18} /></span>

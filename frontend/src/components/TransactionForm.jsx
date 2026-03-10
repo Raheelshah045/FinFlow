@@ -194,7 +194,7 @@ export const TransactionForm = ({ type, products, parties, accounts, onSubmit, o
             {/* Summary */}
             <div style={{ background: "var(--bg-main)", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", padding: "20px", marginBottom: 32 }}>
                 <div style={{ display: "flex", justifyContent: "space-between", fontSize: 13, color: "var(--text-muted)", marginBottom: 8, fontWeight: 500 }}><span>Gross Valuation</span><span>{fmt(total)}</span></div>
-                <div style={{ display: "flex", justifyContent: "space-between", fontSize: 20, fontWeight: 800, color: "var(--text-main)", borderTop: "1px solid var(--border)", paddingTop: 12 }}><span>Settlement Total</span><span style={{ color: "var(--primary)" }}>{fmt(total)}</span></div>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: 20, fontWeight: 800, color: "var(--text-main)", borderTop: "1px solid var(--border)", paddingTop: 12 }}><span>Settlement Total</span><span style={{ color: "var(--accent)" }}>{fmt(total)}</span></div>
                 <div style={{ marginTop: 12, fontSize: 11, color: "var(--text-muted)", fontWeight: 500, fontStyle: "italic", opacity: 0.8 }}>
                     POSTING LOGIC: {type === "purchase"
                         ? `Debit Inventory Registry (+${fmtShort(total)}) / Credit ${paymentMode === "cash" ? "Liquid Funds" : "Institutional Balance"} (-${fmtShort(total)})`
@@ -205,30 +205,30 @@ export const TransactionForm = ({ type, products, parties, accounts, onSubmit, o
             {/* Footer Buttons */}
             <div style={{ display: "flex", gap: 12, justifyContent: "flex-end" }}>
                 <button onClick={onClose} style={{ padding: "12px 24px", border: "1px solid var(--border)", borderRadius: 10, background: "var(--bg-card)", cursor: "pointer", fontWeight: 700, fontSize: 13, color: "var(--text-muted)", transition: "all 0.2s" }} onMouseEnter={e => e.currentTarget.style.background = "var(--bg-main)"} onMouseLeave={e => e.currentTarget.style.background = "var(--bg-card)"}>ABORT</button>
-                <button onClick={handleSubmit} style={{ padding: "12px 28px", border: "none", borderRadius: 10, background: "var(--primary)", color: "#fff", cursor: "pointer", fontWeight: 700, fontSize: 13, display: "flex", alignItems: "center", gap: 10, transition: "all 0.3s", boxShadow: "0 10px 15px -3px rgba(37, 99, 235, 0.2)" }} onMouseEnter={e => e.currentTarget.style.filter = "brightness(1.1)"} onMouseLeave={e => e.currentTarget.style.filter = "none"}>
+                <button onClick={handleSubmit} style={{ padding: "12px 28px", border: "none", borderRadius: 10, background: "var(--primary)", color: "#fff", cursor: "pointer", fontWeight: 700, fontSize: 13, display: "flex", alignItems: "center", gap: 10, transition: "all 0.3s", boxShadow: "0 10px 15px -3px rgba(10, 30, 60, 0.2)" }} onMouseEnter={e => e.currentTarget.style.filter = "brightness(1.1)"} onMouseLeave={e => e.currentTarget.style.filter = "none"}>
                     <Icon name="check" size={18} /> CONFIRM & POST ENTRY
                 </button>
             </div>
 
             {/* Modals */}
             {showNewVendorModal && (
-                <div style={{ position: "fixed", inset: 0, background: "rgba(15,23,42,0.6)", backdropFilter: "blur(4px)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1100 }}>
+                <div style={{ position: "fixed", inset: 0, background: "rgba(10,30,60,0.7)", backdropFilter: "blur(4px)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1100 }}>
                     <div style={{ background: "#fff", padding: 24, borderRadius: 16, width: 340, boxShadow: "0 20px 50px rgba(0,0,0,0.2)" }}>
-                        <h3 style={{ margin: "0 0 16px", fontSize: 18, fontWeight: 800 }}>Quick Add Vendor</h3>
+                        <h3 style={{ margin: "0 0 16px", fontSize: 18, fontWeight: 800, color: "var(--primary)" }}>Quick Register Vendor</h3>
                         <label style={labelStyle}>Vendor Name</label>
                         <input value={newVendorName} onChange={e => setNewVendorName(e.target.value)} placeholder="e.g. Acme Corp" style={{ ...inputStyle(), marginBottom: 20 }} autoFocus />
                         <div style={{ display: "flex", gap: 8 }}>
-                            <button onClick={() => setShowNewVendorModal(false)} style={{ flex: 1, padding: 10, borderRadius: 8, border: "1.5px solid #e2e8f0", background: "#fff", cursor: "pointer", fontWeight: 600 }}>Cancel</button>
-                            <button onClick={handleQuickAddVendor} style={{ flex: 1.5, padding: 10, borderRadius: 8, border: "none", background: "#3b82f6", color: "#fff", cursor: "pointer", fontWeight: 700 }}>Save Vendor</button>
+                            <button onClick={() => setShowNewVendorModal(false)} style={{ flex: 1, padding: 10, borderRadius: 8, border: "1px solid var(--border)", background: "#fff", cursor: "pointer", fontWeight: 600 }}>Cancel</button>
+                            <button onClick={handleQuickAddVendor} style={{ flex: 1.5, padding: 10, borderRadius: 8, border: "none", background: "var(--accent)", color: "#fff", cursor: "pointer", fontWeight: 700 }}>Save Vendor</button>
                         </div>
                     </div>
                 </div>
             )}
 
             {showNewProductModal && (
-                <div style={{ position: "fixed", inset: 0, background: "rgba(15,23,42,0.6)", backdropFilter: "blur(4px)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1100 }}>
+                <div style={{ position: "fixed", inset: 0, background: "rgba(10,30,60,0.7)", backdropFilter: "blur(4px)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1100 }}>
                     <div style={{ background: "#fff", padding: 24, borderRadius: 16, width: 400, boxShadow: "0 20px 50px rgba(0,0,0,0.2)" }}>
-                        <h3 style={{ margin: "0 0 16px", fontSize: 18, fontWeight: 800 }}>Quick Add Product</h3>
+                        <h3 style={{ margin: "0 0 16px", fontSize: 18, fontWeight: 800, color: "var(--primary)" }}>Quick Add Product</h3>
                         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
                             <div style={{ gridColumn: "span 2" }}>
                                 <label style={labelStyle}>Product Name</label>
@@ -252,8 +252,8 @@ export const TransactionForm = ({ type, products, parties, accounts, onSubmit, o
                             </div>
                         </div>
                         <div style={{ display: "flex", gap: 8, marginTop: 20 }}>
-                            <button onClick={() => setShowNewProductModal(false)} style={{ flex: 1, padding: 10, borderRadius: 8, border: "1.5px solid #e2e8f0", background: "#fff", cursor: "pointer", fontWeight: 600 }}>Cancel</button>
-                            <button onClick={handleQuickAddProduct} style={{ flex: 1.5, padding: 10, borderRadius: 8, border: "none", background: "#3b82f6", color: "#fff", cursor: "pointer", fontWeight: 700 }}>Save Product</button>
+                            <button onClick={() => setShowNewProductModal(false)} style={{ flex: 1, padding: 10, borderRadius: 8, border: "1px solid var(--border)", background: "#fff", cursor: "pointer", fontWeight: 600 }}>Cancel</button>
+                            <button onClick={handleQuickAddProduct} style={{ flex: 1.5, padding: 10, borderRadius: 8, border: "none", background: "var(--accent)", color: "#fff", cursor: "pointer", fontWeight: 700 }}>Save Product</button>
                         </div>
                     </div>
                 </div>

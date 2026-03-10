@@ -100,11 +100,11 @@ export const DashboardPage = ({ vouchers, products, accounts, onUpdateAccount })
                     label="Institutional Funds"
                     value={bank}
                     sub="Verified bank balance"
-                    accent="blue"
+                    accent="gold"
                     onUpdate={(val) => onUpdateAccount(bankAcc.id, val)}
                 />
-                <StatCard label="Operating Profit" value={totalMargin} sub={`Performance: ${monthLabel.split(' ')[0]}`} accent="amber" />
-                <StatCard label="Inventory Value" value={products.reduce((s, p) => s + (p.stock || 0) * (p.purchasePrice || 0), 0)} sub={`${products.length} active SKUs`} accent="red" />
+                <StatCard label="Net Yield" value={totalMargin} sub={`Performance: ${monthLabel.split(' ')[0]}`} accent="amber" />
+                <StatCard label="Inventory Valuation" value={products.reduce((s, p) => s + (p.stock || 0) * (p.purchasePrice || 0), 0)} sub={`${products.length} registered SKUs`} accent="navy" />
             </div>
 
             <div className="dashboard-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 24, marginBottom: 24 }}>
@@ -115,14 +115,14 @@ export const DashboardPage = ({ vouchers, products, accounts, onUpdateAccount })
                             <p style={{ margin: "4px 0 0", fontSize: 13, color: "var(--text-muted)" }}>Sales vs Procurement trends</p>
                         </div>
                         <div style={{ display: "flex", gap: 16, fontSize: 11, fontWeight: 700 }}>
-                            <span style={{ display: "flex", alignItems: "center", gap: 6, color: "var(--text-main)" }}><span style={{ width: 8, height: 8, background: "#3b82f6", borderRadius: "50%" }} /> SALES</span>
-                            <span style={{ display: "flex", alignItems: "center", gap: 6, color: "var(--text-main)" }}><span style={{ width: 8, height: 8, background: "#f87171", borderRadius: "50%" }} /> PURCHASES</span>
+                            <span style={{ display: "flex", alignItems: "center", gap: 6, color: "var(--text-main)" }}><span style={{ width: 8, height: 8, background: "var(--accent)", borderRadius: "50%" }} /> REVENUE</span>
+                            <span style={{ display: "flex", alignItems: "center", gap: 6, color: "var(--text-main)" }}><span style={{ width: 8, height: 8, background: "#f87171", borderRadius: "50%" }} /> OUTFLOW</span>
                         </div>
                     </div>
                     <MiniBarChart data={chartData} height={200} />
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginTop: 28 }}>
                         <div style={{ background: "var(--bg-main)", borderRadius: "var(--radius-md)", padding: "16px", border: "1px solid var(--border)" }}>
-                            <div style={{ fontSize: 10, color: "var(--primary)", fontWeight: 800, marginBottom: 6, letterSpacing: "0.05em" }}>PERIOD REVENUE</div>
+                            <div style={{ fontSize: 10, color: "var(--accent)", fontWeight: 800, marginBottom: 6, letterSpacing: "0.05em" }}>PERIOD REVENUE</div>
                             <div style={{ fontSize: 22, fontWeight: 800, color: "var(--text-main)" }}>{fmtShort(totalSales)}</div>
                         </div>
                         <div style={{ background: "var(--bg-main)", borderRadius: "var(--radius-md)", padding: "16px", border: "1px solid var(--border)" }}>
@@ -142,7 +142,7 @@ export const DashboardPage = ({ vouchers, products, accounts, onUpdateAccount })
                                     <div style={{ fontSize: 14, fontWeight: 600, color: "var(--text-main)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{p.name}</div>
                                     <div style={{ fontSize: 11, color: "var(--text-muted)", marginTop: 2 }}>ID: {p.sku}</div>
                                 </div>
-                                <Badge color={p.stock === 0 ? "red" : "amber"}>{p.stock === 0 ? "OUT OF STOCK" : `${p.stock} UNITS`}</Badge>
+                                <Badge color={p.stock === 0 ? "red" : "gold"}>{p.stock === 0 ? "OUT OF STOCK" : `${p.stock} UNITS`}</Badge>
                             </div>
                         ))}
                     </div>
@@ -150,11 +150,11 @@ export const DashboardPage = ({ vouchers, products, accounts, onUpdateAccount })
             </div>
 
             <div style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: "var(--radius-lg)", padding: "28px", boxShadow: "var(--shadow)" }}>
-                <h3 style={{ margin: "0 0 20px", fontSize: 16, fontWeight: 700, color: "var(--text-main)" }}>Recent Ledger Entries ({monthLabel.split(' ')[0]})</h3>
+                <h3 style={{ margin: "0 0 20px", fontSize: 16, fontWeight: 700, color: "var(--text-main)" }}>Recent Transaction Ledger ({monthLabel.split(' ')[0]})</h3>
                 <DataTable searchable={false} columns={[
-                    { key: "id", label: "REF NO", render: v => <span style={{ fontWeight: 700, color: "var(--primary)", fontSize: 12 }}>{v}</span> },
-                    { key: "date", label: "DATE" },
-                    { key: "type", label: "TYPE", render: v => <Badge color={v === "sale" ? "green" : "blue"}>{v.toUpperCase()}</Badge> },
+                    { key: "id", label: "ENTRY REF", render: v => <span style={{ fontWeight: 700, color: "var(--accent)", fontSize: 12 }}>{v}</span> },
+                    { key: "date", label: "VALUE DATE" },
+                    { key: "type", label: "CLASSIFICATION", render: v => <Badge color={v === "sale" ? "green" : "navy"}>{v.toUpperCase()}</Badge> },
                     { key: "party", label: "COUNTERPARTY" },
                     { key: "total", label: "SETTLEMENT", align: "right", render: v => <span style={{ fontWeight: 800, color: "var(--text-main)" }}>{fmt(v)}</span> },
                 ]} data={recentVouchers} />
