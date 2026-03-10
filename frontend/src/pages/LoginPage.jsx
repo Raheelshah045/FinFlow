@@ -45,10 +45,8 @@ export const LoginPage = ({ onLogin }) => {
                 }
                 .logo-container { display: flex; flex-direction: column; align-items: center; margin-bottom: 40px; }
                 .logo-box {
-                    width: 90px; height: 90px; background: #ffffff;
-                    border-radius: 20px; display: flex; align-items: center; justifyContent: center;
-                    margin-bottom: 24px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-                    padding: 12px;
+                    width: 120px; height: 120px; display: flex; align-items: center; justifyContent: center;
+                    margin-bottom: 16px;
                 }
                 .auth-title { color: #fff; fontSize: 34px; fontWeight: 800; letterSpacing: "-0.04em"; margin: 0; }
                 .auth-subtitle { color: #94a3b8; fontSize: 14px; marginTop: 8px; fontWeight: 600; letterSpacing: "0.02em"; textTransform: uppercase; }
@@ -86,7 +84,7 @@ export const LoginPage = ({ onLogin }) => {
             <div className="auth-card">
                 <div className="logo-container">
                     <div className="logo-box">
-                        <img src="/logo.png" alt="Logo" style={{ width: "64px", height: "64px", objectFit: "contain" }} />
+                        <img src="/logo.png" alt="Logo" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
                     </div>
                     <h1 className="auth-title">Balancify ERP</h1>
                     <p className="auth-subtitle">Professional Enterprise Management</p>

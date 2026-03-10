@@ -195,8 +195,8 @@ export default function App() {
             {isAuthenticated && !isAdmin && (
                 <div className={`sidebar ${sidebarOpen ? 'mobile-open' : ''}`} style={{ width: sidebarOpen ? 280 : 72, background: "var(--bg-sidebar)", display: "flex", flexDirection: "column", flexShrink: 0, transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)", overflow: "hidden", borderRight: "1px solid rgba(255,255,255,0.05)" }}>
                     <div style={{ padding: sidebarOpen ? "28px 24px" : "28px 0", display: "flex", alignItems: "center", justifyContent: sidebarOpen ? "flex-start" : "center", gap: 14 }}>
-                        <div style={{ width: 44, height: 44, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", background: "#ffffff", borderRadius: 12, boxShadow: "0 4px 10px rgba(0,0,0,0.1)" }}>
-                            <img src="/logo.png" alt="Logo" style={{ width: "28px", height: "28px", objectFit: "contain" }} />
+                        <div style={{ width: 48, height: 48, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                            <img src="/logo.png" alt="Logo" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
                         </div>
                         {sidebarOpen && (
                             <div style={{ overflow: "hidden" }}>
