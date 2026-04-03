@@ -32,7 +32,7 @@ export const InventoryPage = ({ products, onAdd }) => {
                 </div>
                 <button
                     onClick={() => setIsModalOpen(true)}
-                    style={{ background: "var(--primary)", color: "#fff", border: "none", padding: "12px 24px", borderRadius: "var(--radius-md)", fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 8, transition: "all 0.2s", boxShadow: "0 4px 12px rgba(10, 30, 60, 0.15)" }}
+                    style={{ background: "var(--primary)", color: "#fff", border: "none", padding: "12px 24px", borderRadius: "var(--radius-md)", fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 8, transition: "all 0.2s", boxShadow: "0 4px 12px rgba(132, 204, 22, 0.15)" }}
                     onMouseEnter={e => e.currentTarget.style.filter = "brightness(1.1)"}
                     onMouseLeave={e => e.currentTarget.style.filter = "none"}
                 >
@@ -98,7 +98,7 @@ export const InventoryPage = ({ products, onAdd }) => {
                         <label style={{ display: "block", fontSize: 11, fontWeight: 700, color: "var(--text-muted)", marginBottom: 8, textTransform: "uppercase", letterSpacing: "0.05em" }}>Sale Price</label>
                         <input required type="number" value={form.salePrice} onChange={e => setForm({ ...form, salePrice: e.target.value })} placeholder="0.00" style={{ width: "100%", padding: "12px 14px", borderRadius: "var(--radius-md)", border: "1px solid var(--border)", background: "var(--bg-main)", outline: "none", fontSize: 13 }} />
                     </div>
-                    <button type="submit" style={{ gridColumn: "span 2", background: "var(--primary)", color: "#fff", border: "none", padding: "16px", borderRadius: "var(--radius-md)", fontWeight: 700, cursor: "pointer", marginTop: 8, fontSize: 14, boxShadow: "0 10px 15px -3px rgba(10, 30, 60, 0.2)" }}>Save Product</button>
+                    <button type="submit" style={{ gridColumn: "span 2", background: "var(--primary)", color: "#fff", border: "none", padding: "16px", borderRadius: "var(--radius-md)", fontWeight: 700, cursor: "pointer", marginTop: 8, fontSize: 14, boxShadow: "0 10px 15px -3px rgba(132, 204, 22, 0.2)" }}>Save Product</button>
                 </form>
             </Modal>
         </div>

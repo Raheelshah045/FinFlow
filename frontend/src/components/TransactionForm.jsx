@@ -205,14 +205,14 @@ export const TransactionForm = ({ type, products, parties, accounts, onSubmit, o
             {/* Footer Buttons */}
             <div style={{ display: "flex", gap: 12, justifyContent: "flex-end" }}>
                 <button onClick={onClose} style={{ padding: "12px 24px", border: "1px solid var(--border)", borderRadius: 10, background: "var(--bg-card)", cursor: "pointer", fontWeight: 700, fontSize: 13, color: "var(--text-muted)", transition: "all 0.2s" }} onMouseEnter={e => e.currentTarget.style.background = "var(--bg-main)"} onMouseLeave={e => e.currentTarget.style.background = "var(--bg-card)"}>ABORT</button>
-                <button onClick={handleSubmit} style={{ padding: "12px 28px", border: "none", borderRadius: 10, background: "var(--primary)", color: "#fff", cursor: "pointer", fontWeight: 700, fontSize: 13, display: "flex", alignItems: "center", gap: 10, transition: "all 0.3s", boxShadow: "0 10px 15px -3px rgba(10, 30, 60, 0.2)" }} onMouseEnter={e => e.currentTarget.style.filter = "brightness(1.1)"} onMouseLeave={e => e.currentTarget.style.filter = "none"}>
+                <button onClick={handleSubmit} style={{ padding: "12px 28px", border: "none", borderRadius: 10, background: "var(--primary)", color: "#fff", cursor: "pointer", fontWeight: 700, fontSize: 13, display: "flex", alignItems: "center", gap: 10, transition: "all 0.3s", boxShadow: "0 10px 15px -3px rgba(132, 204, 22, 0.2)" }} onMouseEnter={e => e.currentTarget.style.filter = "brightness(1.1)"} onMouseLeave={e => e.currentTarget.style.filter = "none"}>
                     <Icon name="check" size={18} /> CONFIRM & POST ENTRY
                 </button>
             </div>
 
             {/* Modals */}
             {showNewVendorModal && (
-                <div style={{ position: "fixed", inset: 0, background: "rgba(10,30,60,0.7)", backdropFilter: "blur(4px)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1100 }}>
+                <div style={{ position: "fixed", inset: 0, background: "rgba(26,77,46,0.7)", backdropFilter: "blur(4px)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1100 }}>
                     <div style={{ background: "#fff", padding: 24, borderRadius: 16, width: 340, boxShadow: "0 20px 50px rgba(0,0,0,0.2)" }}>
                         <h3 style={{ margin: "0 0 16px", fontSize: 18, fontWeight: 800, color: "var(--primary)" }}>Quick Register Vendor</h3>
                         <label style={labelStyle}>Vendor Name</label>
@@ -226,7 +226,7 @@ export const TransactionForm = ({ type, products, parties, accounts, onSubmit, o
             )}
 
             {showNewProductModal && (
-                <div style={{ position: "fixed", inset: 0, background: "rgba(10,30,60,0.7)", backdropFilter: "blur(4px)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1100 }}>
+                <div style={{ position: "fixed", inset: 0, background: "rgba(26,77,46,0.7)", backdropFilter: "blur(4px)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1100 }}>
                     <div style={{ background: "#fff", padding: 24, borderRadius: 16, width: 400, boxShadow: "0 20px 50px rgba(0,0,0,0.2)" }}>
                         <h3 style={{ margin: "0 0 16px", fontSize: 18, fontWeight: 800, color: "var(--primary)" }}>Quick Add Product</h3>
                         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>

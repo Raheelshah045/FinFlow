@@ -1,12 +1,12 @@
 import React from "react";
 export const Badge = ({ children, color = "blue" }) => {
     const colors = {
-        navy: ["rgba(10, 30, 60, 0.1)", "#0A1E3C"],
-        gold: ["rgba(197, 160, 89, 0.12)", "#A68045"],
-        blue: ["rgba(37, 99, 235, 0.1)", "#1d4ed8"],
-        green: ["rgba(16, 185, 129, 0.1)", "#047857"],
+        navy: ["rgba(26, 77, 46, 0.1)", "#1a4d2e"],
+        gold: ["rgba(132, 204, 22, 0.12)", "#65a30d"],
+        blue: ["rgba(34, 197, 94, 0.1)", "#15803d"],
+        green: ["rgba(20, 184, 166, 0.1)", "#0d9488"],
         red: ["rgba(239, 68, 68, 0.1)", "#b91c1c"],
-        amber: ["rgba(197, 160, 89, 0.1)", "#A68045"],
+        amber: ["rgba(132, 204, 22, 0.1)", "#4d7c0f"],
         gray: ["#f1f5f9", "#475569"]
     };
     const [bg, text] = colors[color] || colors.blue;

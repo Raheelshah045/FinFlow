@@ -129,19 +129,19 @@ export default function App() {
         <div style={{ display: "flex", height: "100vh", fontFamily: "'Sora', 'Segoe UI', sans-serif", background: "var(--bg-main)", overflow: "hidden" }}>
             <style>{`
                 :root {
-                    --primary: #0A1E3C;
-                    --primary-soft: rgba(10, 30, 60, 0.08);
-                    --accent: #C5A059;
-                    --accent-soft: rgba(197, 160, 89, 0.15);
-                    --success: #10b981;
-                    --warning: #C5A059;
+                    --primary: #1a4d2e;
+                    --primary-soft: rgba(26, 77, 46, 0.08);
+                    --accent: #84cc16;
+                    --accent-soft: rgba(132, 204, 22, 0.15);
+                    --success: #22c55e;
+                    --warning: #f59e0b;
                     --danger: #ef4444;
-                    --bg-main: #f4f7f9;
+                    --bg-main: #ffffff;
                     --bg-card: #ffffff;
-                    --bg-sidebar: #0A1E3C;
-                    --text-main: #0A1E3C;
-                    --text-muted: #64748b;
-                    --border: #e2e8f0;
+                    --bg-sidebar: #1a4d2e;
+                    --text-main: #064e3b;
+                    --text-muted: #6b7280;
+                    --border: #e5e7eb;
                     --radius-lg: 24px;
                     --radius-md: 16px;
                     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
@@ -256,13 +256,13 @@ export default function App() {
                     <div className="mobile-header" style={{ display: "none", alignItems: "center", justifyContent: "space-between", marginBottom: 20, padding: "4px 0" }}>
                         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                             <img src="/logo.png" alt="Logo" style={{ width: 32, height: 32 }} />
-                            <span style={{ fontWeight: 800, color: "#0f172a", fontSize: 18 }}>Balancify</span>
+                            <span style={{ fontWeight: 800, color: "var(--primary)", fontSize: 18 }}>Balancify</span>
                         </div>
                         <button
                             onClick={() => setSidebarOpen(true)}
-                            style={{ background: "#fff", border: "1.5px solid #e2e8f0", borderRadius: 8, padding: 8, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}
+                            style={{ background: "#fff", border: "1px solid var(--border)", borderRadius: 8, padding: 8, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}
                         >
-                            <Icon name="menu" size={20} color="#0f172a" />
+                            <Icon name="menu" size={20} color="var(--primary)" />
                         </button>
                     </div>
 

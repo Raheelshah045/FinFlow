@@ -20,7 +20,7 @@ export const LoginPage = ({ onLogin }) => {
     return (
         <div style={{
             height: "100vh", width: "100%", display: "flex", alignItems: "center", justifyContent: "center",
-            background: "radial-gradient(circle at center, #142850, #0A1E3C)",
+            background: "radial-gradient(circle at center, #1a4d2e, #064e3b)",
             position: "relative", overflow: "hidden", fontFamily: "'Sora', sans-serif"
         }}>
             <div style={{
@@ -59,33 +59,33 @@ export const LoginPage = ({ onLogin }) => {
                     border-radius: 16px; padding: 16px 16px 16px 52px; color: #fff; font-size: 15px;
                     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); outline: none;
                 }
-                .auth-input:focus { border-color: #C5A059; background: rgba(255, 255, 255, 0.08); box-shadow: 0 0 0 4px rgba(197, 160, 89, 0.15); }
-                .auth-input:focus + .input-icon { color: #C5A059; }
+                .auth-input:focus { border-color: #84cc16; background: rgba(255, 255, 255, 0.08); box-shadow: 0 0 0 4px rgba(132, 204, 22, 0.15); }
+                .auth-input:focus + .input-icon { color: #84cc16; }
                 .password-toggle {
                     position: absolute; right: 18px; top: 50%; transform: translateY(-50%);
                     color: #475569; cursor: pointer; background: none; border: none; padding: 0; z-index: 10; transition: color 0.2s;
                 }
-                .password-toggle:hover { color: #C5A059; }
+                .password-toggle:hover { color: #84cc16; }
                 .auth-button {
-                    width: 100%; background: linear-gradient(135deg, #C5A059 0%, #A68045 100%);
-                    color: #0A1E3C; border: none; border-radius: 16px; padding: 18px; fontSize: 16px; fontWeight: 800;
+                    width: 100%; background: linear-gradient(135deg, #84cc16 0%, #65a30d 100%);
+                    color: #064e3b; border: none; border-radius: 16px; padding: 18px; fontSize: 16px; fontWeight: 800;
                     cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); display: flex; alignItems: center;
-                    justifyContent: center; gap: 12px; margin-top: 32px; box-shadow: 0 10px 20px rgba(166, 128, 69, 0.2);
+                    justifyContent: center; gap: 12px; margin-top: 32px; box-shadow: 0 10px 20px rgba(132, 204, 22, 0.2);
                     text-transform: uppercase; letter-spacing: 0.05em;
                 }
-                .auth-button:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(166, 128, 69, 0.4); filter: brightness(1.1); }
+                .auth-button:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(132, 204, 22, 0.4); filter: brightness(1.1); }
                 .auth-button:active { transform: translateY(0); }
                 .auth-button:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
                 .auth-footer { text-align: center; margin-top: 40px; font-size: 14px; color: #64748b; fontWeight: 600; }
-                .auth-link { color: #C5A059; text-decoration: none; font-weight: 800; cursor: pointer; transition: color 0.2s; position: relative; }
-                .auth-link:hover { color: #dfbc7a; text-decoration: underline; }
+                .auth-link { color: #84cc16; text-decoration: none; font-weight: 800; cursor: pointer; transition: color 0.2s; position: relative; }
+                .auth-link:hover { color: #bef264; text-decoration: underline; }
                 .auth-link[data-tooltip]:hover::after {
                     content: attr(data-tooltip);
                     position: absolute;
                     bottom: 100%;
                     right: 0;
                     margin-bottom: 8px;
-                    background: #0A1E3C;
+                    background: #064e3b;
                     color: #fff;
                     padding: 8px 14px;
                     border-radius: 12px;
@@ -94,7 +94,7 @@ export const LoginPage = ({ onLogin }) => {
                     line-height: 1.5;
                     text-align: center;
                     box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-                    border: 1px solid #C5A059;
+                    border: 1px solid #84cc16;
                     z-index: 100;
                     pointer-events: none;
                     font-weight: 500;

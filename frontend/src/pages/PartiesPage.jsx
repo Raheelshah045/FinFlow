@@ -29,7 +29,7 @@ export const PartiesPage = ({ parties, onAdd }) => {
                 </div>
                 <button
                     onClick={() => setIsModalOpen(true)}
-                    style={{ background: "var(--primary)", color: "#fff", border: "none", padding: "12px 24px", borderRadius: "var(--radius-md)", fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 8, transition: "all 0.2s", boxShadow: "0 4px 12px rgba(10, 30, 60, 0.15)" }}
+                    style={{ background: "var(--primary)", color: "#fff", border: "none", padding: "12px 24px", borderRadius: "var(--radius-md)", fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 8, transition: "all 0.2s", boxShadow: "0 4px 12px rgba(132, 204, 22, 0.15)" }}
                     onMouseEnter={e => e.currentTarget.style.filter = "brightness(1.1)"}
                     onMouseLeave={e => e.currentTarget.style.filter = "none"}
                 >
@@ -63,7 +63,7 @@ export const PartiesPage = ({ parties, onAdd }) => {
                     </div>
                     <button
                         type="submit"
-                        style={{ background: "var(--primary)", color: "#fff", border: "none", padding: "16px", borderRadius: "var(--radius-md)", fontWeight: 700, cursor: "pointer", marginTop: 8, fontSize: 14, boxShadow: "0 10px 15px -3px rgba(10, 30, 60, 0.2)" }}
+                        style={{ background: "var(--primary)", color: "#fff", border: "none", padding: "16px", borderRadius: "var(--radius-md)", fontWeight: 700, cursor: "pointer", marginTop: 8, fontSize: 14, boxShadow: "0 10px 15px -3px rgba(132, 204, 22, 0.2)" }}
                     >
                         Save Vendor Details
                     </button>
