@@ -76,7 +76,7 @@ export const InventoryPage = ({ products, onAdd }) => {
                 ]} data={products.map(p => ({ ...p, margin: p.salePrice - p.purchasePrice }))} />
             </div>
 
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Add New Product">
+            <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)} title="Add New Product">
                 <form onSubmit={handleSubmit} className="grid-1-1" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
                     <div style={{ gridColumn: "span 2" }}>
                         <label style={{ display: "block", fontSize: 11, fontWeight: 700, color: "var(--text-muted)", marginBottom: 8, textTransform: "uppercase", letterSpacing: "0.05em" }}>Product Name</label>

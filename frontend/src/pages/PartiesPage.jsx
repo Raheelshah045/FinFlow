@@ -48,7 +48,7 @@ export const PartiesPage = ({ parties, onAdd }) => {
                 ]} data={vendors} />
             </div>
 
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Register New Vendor">
+            <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)} title="Register New Vendor">
                 <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                     <div>
                         <label style={{ display: "block", fontSize: 11, fontWeight: 700, color: "var(--text-muted)", marginBottom: 8, textTransform: "uppercase", letterSpacing: "0.05em" }}>Vendor Name</label>
